@@ -12,9 +12,6 @@
 </head>
 
 <body>
-
-    <!--<img src="{{ url_for('static', filename='images/logo2.svg') }}" class="logo2">-->
-
     <header class="header">
         <div class="container">
             <div class="header__top">
@@ -26,7 +23,6 @@
                         alt="Docs Generator Logo">
                 </a>
                 <nav class="header_menu">
-
                     <ul class="menu__list">
                         <li class="menu__item"><a href="/" class="menu__link">Главная</a></li>
                         <li class="menu__item"><a href="/form" class="menu__link">Форма</a></li>
@@ -45,10 +41,35 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </header>
 
+    <section class="landing">
+        <div class="container">
+            <h1 class="landing__title">Создайте свой документ по готовым шаблонам</h1>
+            <h5 class="landing__undertitle">- бесплатный конструктор документов</h5>
+            <p class="landing__text">Выделитесь на фоне других претендентов! С помощью нашего конструктора вы быстро
+                создадите аккуратное и структурированное резюме. Это бесплатно, без регистрации и долгих ожиданий.
+                Скачайте результат в PDF или DOCX и будьте на шаг впереди на пути к новой работе.</p>
+            <ul class="landing__info-list">
+                <li class="landing__info-item">
+                    <img src="{{ url_for('static', filename='images/overview.svg') }}" alt="" class="info-item__img">
+                    <span class="infp-item__text">Быстро заполнить</span>
+                </li>
+                <li class="landing__info-item">
+                    <img src="{{ url_for('static', filename='images/file_save.svg') }}" alt="" class="info-item__img">
+                    <span class="infp-item__text">Легко скачать</span>
+                </li>
+                <li class="landing__info-item">
+                    <img src="{{ url_for('static', filename='images/plagiarism.svg') }}" alt="" class="info-item__img">
+                    <span class="infp-item__text">Большой выбор</span>
+                </li>
+            </ul>
+            <div class="landing__btn">
+            <a href="" class="landing__btn-text">Создать документ</a>
+            </div>
+        </div>
+    </section>
 
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
 
