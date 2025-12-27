@@ -17,28 +17,40 @@
 
     <header class="header">
         <div class="container">
-            <a href="/" class="header__logo">
-                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Docs Generator Logo">
-            </a>
-            <nav class="menu">
-                <ul class="menu__list">
-                    <li class="menu__item"><a href="/" class="menu__link">Главная</a></li>
-                    <li class="menu__item"><a href="/form" class="menu__link">Форма</a></li>
-                </ul>
-            </nav>
-            <div class="actions">
-                <button class="support-btn">
-                    <img src="{{ url_for('static', filename='images/contact_support.svg') }}" alt=""
-                        class="actions-btn__logo">
-                    <span class="actions-btn__title">Помощь</span>
+            <div class="header__top">
+                <button class="menu__btn">
+                    <img src="{{ url_for('static', filename='images/menu.png') }}" alt="">
                 </button>
-                <button class="auth-btn">
-                    <img src="{{ url_for('static', filename='images/person.svg') }}" alt="" class="actions-btn__logo">
-                    <span class="actions-btn__title">Войти</span>
-                </button>
+                <a href="/" class="header__logo">
+                    <img class="header__logo-img" src="{{ url_for('static', filename='images/logo.svg') }}"
+                        alt="Docs Generator Logo">
+                </a>
+                <nav class="header_menu">
+
+                    <ul class="menu__list">
+                        <li class="menu__item"><a href="/" class="menu__link">Главная</a></li>
+                        <li class="menu__item"><a href="/form" class="menu__link">Форма</a></li>
+                    </ul>
+                </nav>
+                <div class="header__actions">
+                    <button class="header__actions-btn">
+                        <img src="{{ url_for('static', filename='images/contact_support.svg') }}" alt=""
+                            class="actions-btn__logo">
+                        <span class="actions-btn__title">Помощь</span>
+                    </button>
+                    <button class="header__actions-btn">
+                        <img src="{{ url_for('static', filename='images/person.svg') }}" alt=""
+                            class="actions-btn__logo">
+                        <span class="actions-btn__title">Войти</span>
+                    </button>
+                </div>
             </div>
+
         </div>
     </header>
+
+
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
 
 </body>
 
