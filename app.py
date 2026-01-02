@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Определяем маршрут для главной страницы
 @app.route("/")
 def home():
-    return render_template("index.html")  
+    return render_template("registration.html")  
 
 # Запускаем сервер
 if __name__ == "__main__":

@@ -1,322 +1,89 @@
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход в личный кабинет</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .login-container {
-            background-color: #FAF8F6;
-            border-radius: 30px;
-            width: 100%;
-            max-width: 600px;
-            max-height: 400px;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .login-header h1 {
-            color: #505050;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            color: #333;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .input-with-link {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .input-with-link label {
-            margin-bottom: 0;
-        }
-
-        .forgot-link {
-            color: #4a6cf7;
-            font-size: 13px;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .forgot-link:hover {
-            color: #3a5ce5;
-            text-decoration: underline;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 15px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #4a6cf7;
-            box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #777;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .login-button {
-            width: 100%;
-            padding: 14px;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-            background: #4A40A7;
-            background: linear-gradient(90deg, rgba(74, 64, 167, 1) 0%, rgba(100, 84, 192, 1) 100%);
-        }
-
-        .login-button:hover {
-            background-color: #3a5ce5;
-        }
-
-        .divider {
-            text-align: center;
-            margin: 30px 0;
-            position: relative;
-            color: #999;
-            font-size: 14px;
-        }
-
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background-color: #eee;
-            z-index: 1;
-        }
-
-        .divider span {
-            background-color: white;
-            padding: 0 15px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .register-prompt {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .register-prompt a {
-            color: #4a6cf7;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .register-prompt a:hover {
-            color: #3a5ce5;
-            text-decoration: underline;
-        }
-
-        .register-button {
-            width: 100%;
-            padding: 14px;
-            background: #4A40A7;
-            background: linear-gradient(90deg, rgba(74, 64, 167, 1) 0%, rgba(100, 84, 192, 1) 100%);
-            color: #4a6cf7;
-            border-radius: 6px;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .register-button:hover {
-            background-color: #4a6cf7;
-            color: white;
-        }
-
-        .error-message {
-            color: #e74c3c;
-            font-size: 13px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 30px 20px;
-            }
-
-            .login-header h1 {
-                font-size: 22px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="login-container">
-        <div class="login-header">
-            <h1>Вход в личный кабинет</h1>
+{% extends 'base.html' %}
+{% block content %}
+<section class="registration">
+    <div class="container">
+        <div class="register-header">
+            <h1>Регистрация нового пользователя</h1>
+            <p class="register-description">
+                Начните сейчас: заполните короткую форму регистрации ниже для создания вашего персонального кабинета.
+                После регистрации вам автоматически предоставляется доступ в ваш личный кабинет.
+                Это пространство для хранения, просмотра и повторного скачивания ранее заполненных вами документов.
+            </p>
         </div>
-
-        <form id="loginForm">
+        <form id="registerForm">
             <div class="form-group">
-                <div class="input-with-link">
-                    <label for="login">Логин</label>
-                    <a href="#" class="forgot-link">Забыли пароль?</a>
-                </div>
+                <label for="fullName">Введите ФИО</label>
                 <div class="input-wrapper">
-                    <input type="text" id="login" class="form-input" placeholder="Введите ваш логин" required>
+                    <input type="text" id="fullName" class="form-input" placeholder="Иванов Иван Иванович" required>
                 </div>
-                <div class="error-message" id="loginError">Пожалуйста, введите логин</div>
+                <div class="error-message" id="fullNameError">Пожалуйста, введите корректное ФИО</div>
             </div>
 
             <div class="form-group">
-                <label for="password">Пароль</label>
+                <label for="email">Введите Email</label>
                 <div class="input-wrapper">
-                    <input type="password" id="password" class="form-input" placeholder="Введите ваш пароль" required>
-                    <button type="button" class="password-toggle" id="togglePassword">Показать</button>
+                    <input type="email" id="email" class="form-input" placeholder="example@email.com" required>
                 </div>
-                <div class="error-message" id="passwordError">Пожалуйста, введите пароль</div>
+                <div class="error-message" id="emailError">Пожалуйста, введите корректный email</div>
             </div>
 
-            <button type="submit" class="login-button">Войти</button>
+            <div class="form-group">
+                <label for="phone">Введите номер телефона</label>
+                <div class="input-wrapper">
+                    <input type="tel" id="phone" class="form-input" placeholder="+7 (900) 123-45-67" required>
+                </div>
+                <div class="phone-hint">Формат: +7 (XXX) XXX-XX-XX</div>
+                <div class="error-message" id="phoneError">Пожалуйста, введите корректный номер телефона</div>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Введите логин</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" class="form-input" placeholder="Придумайте логин" required>
+                </div>
+                <div class="error-message" id="usernameError">Пожалуйста, введите логин (мин. 3 символа)</div>
+            </div>
+
+            <div class="password-wrapper">
+                <div class="form-group" style="flex: 1;">
+                    <label for="password">Введите пароль</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" class="form-input" placeholder="Придумайте пароль"
+                            required>
+                        <button type="button" class="password-toggle" data-target="password">Показать</button>
+                    </div>
+                    <div class="error-message" id="passwordError">Пароль должен содержать минимум 8 символов</div>
+                </div>
+
+                <div class="form-group" style="flex: 1;">
+                    <label for="confirmPassword">Повторите пароль</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="confirmPassword" class="form-input" placeholder="Повторите пароль"
+                            required>
+                        <button type="button" class="password-toggle" data-target="confirmPassword">Показать</button>
+                    </div>
+                    <div class="error-message" id="confirmPasswordError">Пароли не совпадают</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="checkbox-group">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="policyAgreement" required>
+                    <label for="policyAgreement" class="checkbox-label">
+                        Согласие с
+                        <a href="#" class="policy-link" id="policyLink">Политикой обработки персональных данных</a>
+                        и даю Согласие на обработку персональных данных.
+                    </label>
+                </div>
+                <div class="error-message" id="policyError">Необходимо согласие с политикой обработки данных</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <button type="submit" class="registration__submit-button" id="registerButton">Зарегистрироваться</button>
         </form>
-
-        <div class="divider"><span>или</span></div>
-
-        <div class="register-prompt">
-            Еще нет личного кабинета?<br>
-            <a href="#">Зарегистрируйтесь прямо сейчас!</a>
-        </div>
-
-        <button class="register-button" id="registerButton">Зарегистрироваться</button>
     </div>
-
-    <script>
-        // Переключение видимости пароля
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-
-        togglePassword.addEventListener('click', function () {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            this.textContent = type === 'password' ? 'Показать' : 'Скрыть';
-        });
-
-        // Валидация формы
-        const loginForm = document.getElementById('loginForm');
-        const loginError = document.getElementById('loginError');
-        const passwordError = document.getElementById('passwordError');
-
-        loginForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const login = document.getElementById('login').value.trim();
-            const password = document.getElementById('password').value.trim();
-            let isValid = true;
-
-            // Сброс ошибок
-            loginError.style.display = 'none';
-            passwordError.style.display = 'none';
-
-            // Проверка логина
-            if (!login) {
-                loginError.style.display = 'block';
-                isValid = false;
-            }
-
-            // Проверка пароля
-            if (!password) {
-                passwordError.style.display = 'block';
-                isValid = false;
-            }
-
-            if (isValid) {
-                // Здесь обычно отправка данных на сервер
-                alert('Вход выполнен успешно!');
-                // В реальном приложении здесь будет перенаправление
-            }
-        });
-
-        // Переход к регистрации
-        document.getElementById('registerButton').addEventListener('click', function () {
-            alert('Переход к регистрации');
-            // В реальном приложении здесь будет переход на страницу регистрации
-        });
-
-        // Ссылка "Забыли пароль?"
-        document.querySelector('.forgot-link').addEventListener('click', function (e) {
-            e.preventDefault();
-            alert('Восстановление пароля');
-            // В реальном приложении здесь будет переход к восстановлению пароля
-        });
-
-        // Ссылка в тексте регистрации
-        document.querySelector('.register-prompt a').addEventListener('click', function (e) {
-            e.preventDefault();
-            alert('Переход к регистрации');
-            // В реальном приложении здесь будет переход на страницу регистрации
-        });
-    </script>
-</body>
-
-</html>
+</section>
+{% endblock %}

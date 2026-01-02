@@ -33,13 +33,12 @@
                     </ul>
                 </nav>
                 <div class="header__actions">
-                    <button class="header__actions-btn">
+                    <button class="header__actions-btn" data-bs-toggle="modal" data-bs-target="#supportModal">
                         <img src="{{ url_for('static', filename='images/contact_support.svg') }}" alt=""
                             class="actions-btn__logo">
                         <span class="actions-btn__title">Помощь</span>
                     </button>
-                    <button class="header__actions-btn" data-bs-toggle="modal" data-bs-target="#loginModal"
-                        data-bs-whatever="@mdo">
+                    <button class="header__actions-btn" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <img src="{{ url_for('static', filename='images/person.svg') }}" alt=""
                             class="actions-btn__logo">
                         <span class="actions-btn__title">Войти</span>
@@ -121,13 +120,13 @@
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="login-container">
-                    <h1 class="login-title">Вход в личный кабинет</h1>
+                <div class="modal-container">
+                    <h1 class="modal-title">Вход в личный кабинет</h1>
                     <form id="loginForm">
                         <div class="form-group">
                             <label for="login">Введите логин</label>
                             <div class="input-wrapper">
-                                <input type="text" id="login" class="form-input" placeholder="Введите ваш логин"
+                                <input type="text" id="modalLogin" class="form-input" placeholder="Введите ваш логин"
                                     required>
                             </div>
                             <div class="error-message" id="loginError">Логин</div>
@@ -140,14 +139,14 @@
                             </div>
 
                             <div class="input-wrapper">
-                                <input type="password" id="password" class="form-input" placeholder="Введите ваш пароль"
+                                <input type="password" id="logPassword" class="form-input" placeholder="Введите ваш пароль"
                                     required>
                                 <button type="button" class="password-toggle" id="togglePassword">Показать</button>
                             </div>
                             <div class="error-message" id="passwordError">Пожалуйста, введите пароль</div>
                         </div>
 
-                        <button type="submit" class="login-button">Войти</button>
+                        <button type="submit" class="login-button modal-button">Войти</button>
                     </form>
 
                     <div class="autn__bottom">
@@ -163,56 +162,36 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <script>
-                    const togglePassword = document.getElementById('togglePassword');
-                    const passwordInput = document.getElementById('password');
+    <div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-container">
+                    <h1 class="modal-title">Поддержка</h1>
+                    <form id="supportForm" class="modal-form">
+                        <div class="form-group">
+                            <label for="email">Введите почту</label>
+                            <div class="input-wrapper">
+                                <input type="email" id="supEmail" class="form-input" placeholder="example@gmail.com"
+                                    required>
+                            </div>
+                            <div class="error-message" id="supEmailError">Некорректный e-mail</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Введите вопрос</label>
+                            <div class="input-wrapper">
+                                <textarea type="text" id="supMessage" class="form-input support-message__imput" placeholder="Опишите проблему"
+                                    required></textarea>
+                            </div>
+                            <div class="error-message" id="supMessageError">Пожалуйста, опишите свою проблему</div>
+                        </div>
 
-                    togglePassword.addEventListener('click', function () {
-                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                        passwordInput.setAttribute('type', type);
-                        this.textContent = type === 'password' ? 'Показать' : 'Скрыть';
-                    });
-
-                    const loginForm = document.getElementById('loginForm');
-                    const loginError = document.getElementById('loginError');
-                    const passwordError = document.getElementById('passwordError');
-
-                    loginForm.addEventListener('submit', function (e) {
-                        e.preventDefault();
-
-                        const login = document.getElementById('login').value.trim();
-                        const password = document.getElementById('password').value.trim();
-                        let isValid = true;
-
-                        loginError.style.display = 'none';
-                        passwordError.style.display = 'none';
-
-                        if (!login) {
-                            loginError.style.display = 'block';
-                            isValid = false;
-                        }
-
-                        if (!password) {
-                            passwordError.style.display = 'block';
-                            isValid = false;
-                        }
-
-                        if (isValid) {
-                            alert('Вход выполнен успешно!');
-                        }
-                    });
-
-                    document.getElementById('registerButton').addEventListener('click', function () {
-                        alert('Переход к регистрации');
-                    });
-
-                    document.querySelector('.forgot-link').addEventListener('click', function (e) {
-                        e.preventDefault();
-                        alert('Восстановление пароля');
-                    });
-
-                </script>
+                        <button type="submit" class="support-button modal-button">Отправить</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

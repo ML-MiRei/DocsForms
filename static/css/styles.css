@@ -430,26 +430,34 @@ section {
     border: 0;
 }
 
-.login-container {
+.modal-container {
     background-color: #FAF8F6;
     border-radius: 30px;
     width: 100%;
     max-width: 600px;
-    padding: 40px;
+    padding: 35px 40px;
     color: #505050;
 }
 
-.login-title {
+.support-message__imput {
+    min-height: 130px;
+    max-height: 130px;
+    background-color: #ECE6F4;
+}
+
+.modal-title {
     text-align: center;
     font-size: 20px;
     font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .form-group {
     margin-bottom: 5px;
+    width: 100%;
 }
 
-.login-container label {
+.modal-container label {
     display: block;
     font-size: 14px;
     font-weight: 400;
@@ -491,7 +499,7 @@ section {
 
 .form-input:focus {
     outline: none;
-    border: 1px solid #4a6cf7;
+    border: 1px solid #4A40A7;
 }
 
 .password-toggle {
@@ -506,7 +514,7 @@ section {
     font-size: 14px;
 }
 
-.login-button {
+.modal-button {
     width: 207px;
     height: 41px;
     color: white;
@@ -562,6 +570,16 @@ section {
     display: none;
 }
 
+.modal-form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.support-button{
+    margin: 0;
+}
+
 @media (max-width: 620px) {
     .modal-dialog {
         max-width: 400px;
@@ -591,7 +609,8 @@ section {
     .modal-dialog label,
     .register-prompt,
     .forgot-link,
-    .error-message {
+    .error-message,
+    .support-message__imput {
         font-size: 12px;
     }
 
@@ -600,11 +619,11 @@ section {
         height: 50px;
     }
 
-    .login-container {
+    .modal-container {
         padding: 20px;
     }
 
-    .login-title {
+    .modal-title {
         font-size: 16px;
     }
 
@@ -621,6 +640,130 @@ section {
 
 
 /** auth section end **/
+
+/** registration section **/
+.registration {
+    color: #505050;
+    margin-bottom: 20px;
+}
+
+.register-header {
+    margin-bottom: 35px;
+}
+
+.register-header h1 {
+    margin-bottom: 40px;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.registration label {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+.checkbox-group {
+    margin: 25px 0;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-top: 4px;
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.policy-link {
+    color: #4A40A7;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+
+.error-visible {
+    display: flex;
+}
+
+.registration__submit-button {
+    width: 100%;
+    padding: 16px;
+    background: #4A40A7;
+    background-color: linear-gradient(90deg, rgba(74, 64, 167, 1) 0%, rgba(100, 84, 192, 1) 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.registration__submit-button:hover {
+    background-color: #433B74;
+}
+
+.registration__submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.phone-hint {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+.registration .form-group {
+    padding-bottom: 15px;
+}
+
+
+@media (max-width: 600px) {
+    .register-container {
+        padding: 30px 20px;
+    }
+
+    .register-header h1 {
+        font-size: 22px;
+    }
+
+    .form-input {
+        padding: 12px 14px;
+    }
+}
+
+.password-wrapper {
+    display: flex;
+    gap: 15px;
+}
+
+@media (max-width: 480px) {
+    .password-wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/** registration section end **/
+
+
 
 @media (max-width: 1500px) {
 
