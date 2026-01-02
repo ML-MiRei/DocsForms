@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page__title">Макеты для заполнения ваших документов</h1>
+
+    <section class="resume">
+        <h2 class="section_title">Резюме</h2>
+        <div class="resume__templates swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="resume__item">
+                        <img src="{{ url_for('static', filename='images/resume_templates/1.svg') }}" alt=""
+                            class="swiper-slide__img">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="resume__item">
+                        <img src="{{ url_for('static', filename='images/resume_templates/2.svg') }}" alt=""
+                            class="swiper-slide__img">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="resume__item">
+                        <img src="{{ url_for('static', filename='images/resume_templates/5.svg') }}" alt=""
+                            class="swiper-slide__img">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="resume__item">
+                        <img src="{{ url_for('static', filename='images/resume_templates/6.svg') }}" alt=""
+                            class="swiper-slide__img">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="resume__item">
+                        <img src="{{ url_for('static', filename='images/resume_templates/8.svg') }}" alt=""
+                            class="swiper-slide__img">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="resume__item">
+                        <img src="{{ url_for('static', filename='images/resume_templates/9.svg') }}" alt=""
+                            class="swiper-slide__img">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="resume__item">
+                        <img src="{{ url_for('static', filename='images/resume_templates/10.svg') }}" alt=""
+                            class="swiper-slide__img">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swipe-prev swipe_arrow">
+            <img src="{{ url_for('static', filename='images/left_arrow.svg') }}" alt="" class="swipe__arrow-img">
+        </div>
+        <div class="swipe-next swipe_arrow">
+            <img src="{{ url_for('static', filename='images/right_arrow.svg') }}" alt="" class="swipe__arrow-img">
+        </div>
+        <div class="resume-templates__btn">
+            <a href="" class="resume-templates__btn-text">выбрать</a>
+        </div>
+    </section>
+    <section class="statements">
+        <h2 class="section_title">Заявления</h2>
+        <div class="statements_list">
+            <a href="" class="statement-item">Какое то на что то</a>
+            <a href="" class="statement-item">Какое то на что то</a>
+            <a href="" class="statement-item">Какое то на что то</a>
+            <a href="" class="statement-item">Какое то на что то</a>
+            <a href="" class="statement-item">Какое то на что то</a>
+            <a href="" class="statement-item">Какое то на что то</a>
+        </div>
+    </section>
+    <section class="contracts">
+        <h2 class="section_title">Договоры</h2>
+        <div class="contracts_list">
+            <a href="" class="contract-item">Какое то на что то</a>
+            <a href="" class="contract-item">Какое то на что то</a>
+            <a href="" class="contract-item">Какое то на что то</a>
+            <a href="" class="contract-item">Какое то на что то</a>
+            <a href="" class="contract-item">Какое то на что то</a>
+            <a href="" class="contract-item">Какое то на что то</a>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+{% endblock %}

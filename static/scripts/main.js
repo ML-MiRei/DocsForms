@@ -5,16 +5,13 @@ openMenuButton.addEventListener('click', () => {
     menu.classList.toggle('active');
 });
 
-var swiper = new Swiper(".mySwiper", {
+var swiper = new Swiper(".resume__templates", {
     slidesPerView: 1,
     spaceBetween: 10,
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
+    loop: true,
     navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: ".swipe-next",
+        prevEl: ".swipe-prev",
     },
     breakpoints: {
         640: {
