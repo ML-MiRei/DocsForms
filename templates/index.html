@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -66,12 +67,168 @@
                 </li>
             </ul>
             <div class="landing__btn">
-            <a href="" class="landing__btn-text">Создать документ</a>
+                <a href="" class="landing__btn-text">Создать документ</a>
             </div>
         </div>
     </section>
 
+    <section class="info">
+        <div class="container">
+            <h1 class="section__title">Как правильно составить документы для устройства на работу</h1>
+            <p class="section__text">Грамотно оформленные документы — ваш пропуск на желаемую должность. Рассказываем,
+                на
+                что обратить внимание при составлении основных типов бумаг.</p>
+            <ol class="section__list">
+                <li class="section__list-item">
+                    <p class="list-item__title">Резюме: Ваша визитная карточка</p>
+                    <span class="list-item__text">Главное — структура и релевантность. Работодатель должен за 30 секунд
+                        понять ваш профессиональный путь. Уделите особое внимание достижениям на предыдущих местах
+                        работы, подкрепляя их цифрами и фактами. Избегайте воды и лишней информации.</span>
+                </li>
+                <li class="section__list-item">
+                    <p class="list-item__title">Заявление: Официальный тон и краткость</p>
+                    <span class="list-item__text">Это формальный документ, который составляется по строгому образцу.
+                        Укажите корректное наименование должности и компании, свои ФИО и дату. Текст должен быть
+                        лаконичным, без эмоциональных оценок и лишних подробностей.</span>
+                </li>
+                <li class="section__list-item">
+                    <p class="list-item__title">Договор: Внимание к деталям</p>
+                    <span class="list-item__text">Внимательно проверьте все условия: должностные обязанности, размер и
+                        сроки выплаты вознаграждения, режим работы, срок действия договора и условия его расторжения. Не
+                        стесняйтесь задавать уточняющие вопросы работодателю, чтобы избежать недопонимания в
+                        будущем.</span>
+                </li>
+                <li class="section__list-item">
+                    <p class="list-item__title">Сопроводительное письмо: Ваше персональное обращение</p>
+                    <span class="list-item__text">Это не повторение резюме, а возможность показать мотивацию и интерес к
+                        конкретной компании. Объясните, почему вы хотите работать именно там и чем можете быть полезны.
+                        Персонализируйте обращение, указав имя менеджера по подбору персонала.</span>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="actions">
+        <div class="container">
+            <h1 class="section__title">Универсальный алгоритм для создания любого документа</h1>
+            <p class="section__text">Сервис Doc.Forms поможет вам подготовить безупречные документы всего за три шага:
+            </p>
+            <ol class="section__list">
+                <li class="section__list-item">
+                    <p class="list-item__title">Выбрать шаблон</p>
+                    <span class="list-item__text">Найдите подходящий образец в нашем каталоге — от резюме до
+                        договора.</span>
+                </li>
+                <li class="section__list-item">
+                    <p class="list-item__title">Заполнить поля с данными</p>
+                    <span class="list-item__text">Внесите информацию в готовую профессиональную структуру. Система
+                        подскажет, что и где указать.</span>
+                </li>
+                <li class="section__list-item">
+                    <p class="list-item__title">Скачать документ</p>
+                    <span class="list-item__text">Сохраните готовый файл в формате PDF или DOC, чтобы сразу
+                        использовать.</span>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+            <div class="swiper-slide">Slide 8</div>
+            <div class="swiper-slide">Slide 9</div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="container">
+        <h1 class="page__title">Макеты для заполнения ваших документов</h1>
+        <section class="resume">
+            <h2 class="resume__title">Резюме</h2>
+            <div class="resume__templates">
+
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__sections">
+                <div class="footer__contacts">
+                    <h5 class="footer__title">Контакты</h5>
+                    <ul class="contacts__list">
+                        <li class="contacts__list-item">
+                            <img src="{{ url_for('static', filename='images/call.svg') }}" alt=""
+                                class="contacts__logo">
+                            <ul class="phones__list">
+                                <li class="footer-list__item">+7(977)-131-49-09</li>
+                                <li class="footer-list__item">+7(977)-131-94-90</li>
+                            </ul>
+                        </li>
+                        <li class="footer-list__item">
+                            <img src="{{ url_for('static', filename='images/mail.svg') }}" alt=""
+                                class="contacts__logo">
+                            <span class="contact-item__text">pochta-site@gmail.com</span>
+                        </li>
+                        <li class="footer-list__item messengers-logos">
+                            <button class="messenger__btn telegram__btn">
+                                <img src="{{ url_for('static', filename='images/telegram.svg') }}" alt=""
+                                    class="messenger-logo">
+                            </button>
+                            <button class="messenger__btn vk__btn">
+                                <img src="{{ url_for('static', filename='images/vk.svg') }}" alt=""
+                                    class="messenger-logo">
+                            </button>
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer__navigation">
+                    <h5 class="footer__title">Навигация</h5>
+                    <ul class="footer-navigation__list">
+                        <li class="footer-list__item">Страница 1</li>
+                        <li class="footer-list__item">Страница 1</li>
+                        <li class="footer-list__item">Страница 1</li>
+                        <li class="footer-list__item">Страница 1</li>
+                    </ul>
+                </div>
+                <div class="footer__info">
+                    <h5 class="footer__title">Информация</h5>
+                    <ul class="footer-info__list">
+                        <li class="footer-list__item">О нас</li>
+                        <li class="footer-list__item">Помощь по сайту</li>
+                    </ul>
+                </div>
+                <div class="footer__auth">
+                    <h5 class="footer__title">Авторизация</h5>
+                    <ul class="footer-auth__list">
+                        <li class="footer-list__item">Регистрация</li>
+                        <li class="footer-list__item">Личный кабинет</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="" class="footer__logo">
+                <button class="footer__politic">Политика обработки персональных данных</button>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+
 
 </body>
 
