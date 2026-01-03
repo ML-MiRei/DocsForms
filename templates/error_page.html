@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docs Forms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-family: "Lora", serif;
+            box-sizing: border-box;
+            background-color: #E2E1EE;
+        }
+
+        .error__back-button {
+            margin-top: 150px;
+            cursor: pointer;
+            display: flex;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 15px;
+            color: #E2E1EE;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            border: 0;
+            width: 360px;
+            height: 50px;
+            font-weight: 500;
+            font-size: 20px;
+            background: #4A40A7;
+            background: linear-gradient(90deg, rgba(74, 64, 167, 1) 0%, rgba(100, 84, 192, 1) 100%);
+        }
+
+        .error__number {
+            color: #4A40A7;
+            font-weight: 700;
+            font-size: 128px;
+            margin: 0;
+        }
+
+        .error__title {
+            font-weight: 700;
+            font-size: 48px;
+            margin: 10px 0;
+        }
+
+        .error__text {
+            font-weight: 500;
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            align-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            gap: 100px;
+        }
+
+        .error__logo {
+            width: 300px;
+        }
+
+        .section__text {
+            max-width: 577px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="section__text">
+            <h1 class="error__number">404</h1>
+            <h5 class="error__title">Страница не найдена</h5>
+            <p class="error__text">Упс, что-то пошло не так! Неправильно набран адрес или такой страницы не существует.
+            </p>
+            <a href="" class="error__back-button">Вернуться на главную</a>
+        </div>
+        <img src="{{ url_for('static', filename='images/error_icon.svg') }}" alt="" class="error__logo">
+    </div>
+
+</body>
+
+</html>

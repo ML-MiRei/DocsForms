@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.viewer.min.css">
+
+<section class="last-step">
+    <div class="container">
+        <h1 class="landing__title last-step__title">Остался последний шаг - скачать!</h1>
+        <div class="last-step__container">
+            <div class="container_left-side">
+                <h5 class="landing__undertitle">- Процесс создания вашего резюме успешно завершён. Теперь вы можете
+                    перейти
+                    к его получению.</h5>
+                <p class="landing__text">Для этого, пожалуйста, перепроверьте данные ниже на предпросмотре документа
+                    правильность данных. Если все совпадает, Вы сможете скачать готовое резюме в одном из популярных
+                    форматов —
+                    универсальном PDF или удобном для редактирования DOCX.<br /><br />Желаем удачи в трудоустройстве!
+                </p>
+
+            </div>
+
+            <div class="container_right-side">
+                <ol class="section__list conditions__list">
+                    <li class="section__list-item">
+                        <h5 class="list-item__title">Бесплатно</h5>
+                        <p class="list-item__text">Бесплатное использование</p>
+                    </li>
+                    <li class="section__list-item">
+                        <h5 class="list-item__title">Многоформатно</h5>
+                        <p class="list-item__text">Доступные форматы в PDF и DOCX</p>
+                    </li>
+                    <li class="section__list-item">
+                        <h5 class="list-item__title">Конфиденциально</h5>
+                        <p class="list-item__text">Ваши данные надежно защищены</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="download__buttons">
+            <button class="download_btn download__pdf">Скачать PDF</button>
+            <button class="download_btn download__docs">Скачать DOCX</button>
+        </div>
+    </div>
+</section>
+<section class="download__info">
+    <div class="container">
+        <div class="viewer-section">
+            <h3 class="download-section__title">Предпросмотр документа</h3>
+            <div class="viewer-container">
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Загрузка документа...</p>
+                </div>
+                <div id="pdf-viewer" class="pdf-viewer" style="display:none;">
+                    <canvas id="pdf-canvas"></canvas>
+                </div>
+                <div class="controls" id="viewer-controls">
+                    <button id="prev-btn" class="nav-btn" disabled>Назад</button>
+                    <div class="page-info">
+                        Страница: <span id="current-page">1</span> из <span id="total-pages">0</span>
+                    </div>
+                    <button id="next-btn" class="nav-btn" disabled>Вперед</button>
+                </div>
+            </div>
+        </div>
+        <ul class="questions-list">
+            <h3 class="download-section__title">Часто задаваемые вопросы</h3>
+            <li class="question-item">
+                <div class="question-item__head">
+                    <h3 class="question-item__title">Не получается скачать документ</h3>
+                    <img src="{{ url_for('static', filename='images/question_mark.svg') }}" alt=""
+                        class="question-item__icon">
+                </div>
+                <div class="divider"></div>
+                <p class="question-item__text">В случае возникновения проблем со скачиванием документа, наша служба
+                    поддержки готова вам помочь. Для получения оперативной консультации воспользуйтесь поддержкой в
+                    соответствующем разделе «Помощь» или отправьте запрос на адрес pochta-site@gmail.com. Мы приложим
+                    все усилия, чтобы оперативно разрешить вашу проблему.</p>
+            </li>
+            <li class="question-item">
+                <div class="question-item__head">
+                    <h3 class="question-item__title">Мои документы общедоступны?</h3>
+                    <img src="{{ url_for('static', filename='images/question_mark.svg') }}" alt=""
+                        class="question-item__icon">
+                </div>
+                <div class="divider"></div>
+                <p class="question-item__text">Вы можете быть уверены в сохранности своих данных. Все документы, которые
+                    вы создаете с помощью нашего сервиса, являются строго конфиденциальной информацией и хранятся только
+                    в пределах вашего личного кабинета. Мы не передаем и не показываем их третьим лицам.</p>
+            </li>
+            <li class="question-item">
+                <div class="question-item__head">
+                    <h3 class="question-item__title">Какая должна быть фотография?</h3>
+                    <img src="{{ url_for('static', filename='images/question_mark.svg') }}" alt=""
+                        class="question-item__icon">
+                </div>
+                <div class="divider"></div>
+                <p class="question-item__text">Для резюме важна качественная фотография. Идеальным выбором станет
+                    студийный снимок на однотонном светлом фоне. Пожалуйста, избегайте неформальных фото — ваше
+                    изображение должно располагать к деловому общению и вызывать доверие. Оптимальный формат — квадрат
+                    (1:1). Если подходящего фото нет, сделайте его в ближайшем фотосалоне — такой вариант всегда будет
+                    уместен.</p>
+            </li>
+        </ul>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script src="{{ url_for('static', filename='scripts/pdf-viewer.js') }}"></script>
+{% endblock %}
