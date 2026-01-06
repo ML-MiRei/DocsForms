@@ -6,58 +6,60 @@
 
     <section class="resume">
         <h2 class="section_title">Резюме</h2>
-        <div class="resume__templates swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="resume__item">
-                        <img src="{{ url_for('static', filename='images/resume_templates/1.svg') }}" alt=""
-                            class="swiper-slide__img">
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="resume__item">
-                        <img src="{{ url_for('static', filename='images/resume_templates/2.svg') }}" alt=""
-                            class="swiper-slide__img">
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="resume__item">
-                        <img src="{{ url_for('static', filename='images/resume_templates/5.svg') }}" alt=""
-                            class="swiper-slide__img">
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="resume__item">
-                        <img src="{{ url_for('static', filename='images/resume_templates/6.svg') }}" alt=""
-                            class="swiper-slide__img">
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="resume__item">
-                        <img src="{{ url_for('static', filename='images/resume_templates/8.svg') }}" alt=""
-                            class="swiper-slide__img">
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="resume__item">
-                        <img src="{{ url_for('static', filename='images/resume_templates/9.svg') }}" alt=""
-                            class="swiper-slide__img">
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="resume__item">
-                        <img src="{{ url_for('static', filename='images/resume_templates/10.svg') }}" alt=""
-                            class="swiper-slide__img">
-                    </div>
+
+        <div class="slider">
+            <div class="item">
+                <div class="resume__item">
+                    <img src="{{ url_for('static', filename='images/resume_templates/1.svg') }}" alt=""
+                        class="swiper-slide__img">
                 </div>
             </div>
+            <div class="item">
+                <div class="resume__item">
+                    <img src="{{ url_for('static', filename='images/resume_templates/2.svg') }}" alt=""
+                        class="swiper-slide__img">
+                </div>
+            </div>
+            <div class="item">
+                <div class="resume__item">
+                    <img src="{{ url_for('static', filename='images/resume_templates/5.svg') }}" alt=""
+                        class="swiper-slide__img">
+                </div>
+            </div>
+            <div class="item">
+                <div class="resume__item">
+                    <img src="{{ url_for('static', filename='images/resume_templates/6.svg') }}" alt=""
+                        class="swiper-slide__img">
+                </div>
+            </div>
+            <div class="item">
+                <div class="resume__item">
+                    <img src="{{ url_for('static', filename='images/resume_templates/8.svg') }}" alt=""
+                        class="swiper-slide__img">
+                </div>
+            </div>
+            <div class="item">
+                <div class="resume__item">
+                    <img src="{{ url_for('static', filename='images/resume_templates/9.svg') }}" alt=""
+                        class="swiper-slide__img">
+                </div>
+            </div>
+            <div class="item">
+                <div class="resume__item">
+                    <img src="{{ url_for('static', filename='images/resume_templates/10.svg') }}" alt=""
+                        class="swiper-slide__img">
+                </div>
+            </div>
+            <div class="swipe-prev swipe_arrow" id="prev">
+                <img src="{{ url_for('static', filename='images/left_arrow.svg') }}" alt="" class="swipe__arrow-img">
+            </div>
+            <div class="swipe-next swipe_arrow" id="next">
+                <img src="{{ url_for('static', filename='images/right_arrow.svg') }}" alt="" class="swipe__arrow-img">
+            </div>
         </div>
-        <div class="swipe-prev swipe_arrow">
-            <img src="{{ url_for('static', filename='images/left_arrow.svg') }}" alt="" class="swipe__arrow-img">
-        </div>
-        <div class="swipe-next swipe_arrow">
-            <img src="{{ url_for('static', filename='images/right_arrow.svg') }}" alt="" class="swipe__arrow-img">
-        </div>
+
+
+
         <div class="resume-templates__btn">
             <a href="" class="resume-templates__btn-text">выбрать</a>
         </div>
@@ -86,9 +88,12 @@
     </section>
 </div>
 
+
+
+
 {% endblock %}
 
 
 {% block scripts %}
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+<script src="{{ url_for('static', filename='scripts/slider.js') }}"></script>
 {% endblock %}

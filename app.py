@@ -7,7 +7,11 @@ app = Flask(__name__)
 # Определяем маршрут для главной страницы
 @app.route("/")
 def home():
-    return render_template("error_page.html")  
+    return render_template("test.html")  
+
+@app.route("/constructor")
+def constructor():
+    return render_template("constructor.html")  
 
 # Запускаем сервер
 if __name__ == "__main__":
