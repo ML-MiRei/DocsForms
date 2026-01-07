@@ -22,8 +22,10 @@
                             class="profile-docs__title-icon">
                         <p class="profile-docs__title-text title-underscore__text">Мои документы</p>
                     </div>
-                    <a href="{{url_for('documents')}}"
-                        class="resume-templates__btn-text profile-docs__create-btn">Создать новый</a>
+                    <a href="{{url_for('documents')}}" class="resume-templates__btn-text profile-docs__create-btn">
+                        <span class="profile__add-btn__text">Создать новый</span>
+                        <span class="profile__add-btn__icon">+</span>
+                    </a>
                 </div>
                 <div class="cards-container">
                     {% for item in userDocs %}
