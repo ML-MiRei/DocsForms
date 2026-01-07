@@ -89,7 +89,7 @@
             <h5 class="error__title">Страница не найдена</h5>
             <p class="error__text">Упс, что-то пошло не так! Неправильно набран адрес или такой страницы не существует.
             </p>
-            <a href="" class="error__back-button">Вернуться на главную</a>
+            <a href="{{url_for('home')}}" class="error__back-button">Вернуться на главную</a>
         </div>
         <img src="{{ url_for('static', filename='images/error_icon.svg') }}" alt="" class="error__logo">
     </div>

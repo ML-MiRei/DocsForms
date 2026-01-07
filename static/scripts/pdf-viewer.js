@@ -13,10 +13,7 @@ const totalPagesEl = document.getElementById('total-pages');
 const controlsPanel = document.getElementById('viewer-controls');
 
 
-// URL PDF-файла 
-const pdfUrl = 'static/res/example.pdf';
-
-function loadPDF() {
+function loadPDF(pdfUrl) {
     pdfjsLib.getDocument(pdfUrl).promise.then(doc => {
         pdfDoc = doc;
 
@@ -92,5 +89,3 @@ document.addEventListener('keydown', (e) => {
 });
 
 canvas.ondragstart = () => false;
-
-loadPDF();

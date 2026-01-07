@@ -3,33 +3,37 @@
 
 <section class="constructor">
     <div class="container">
-        <div class="forms-layout" id="forms-layout"></div>
-        <div class="form-cont dinamic-cont" id="work-exp-forms-layout">
-            <h2 class="form-title dinamic-cont__title">Опыт работы</h2>
-            <button id="addWorkExpirience" href="" class="modal-button reverse-btn">+ Добавить</button>
-        </div>
-        <div class="form-cont dinamic-cont" id="education-forms-layout">
-            <h2 class="form-title dinamic-cont__title">Образование</h2>
-            <button id="addEducation" href="" class="modal-button reverse-btn">+ Добавить</button>
-        </div>
-        <div class="form-cont dinamic-cont" id="extra-education-forms-layout">
-            <h2 class="form-title dinamic-cont__title">Курсы и тренинги</h2>
-            <button id="addExtraEducation" href="" class="modal-button reverse-btn">+ Добавить</button>
-        </div>
-        <div class="form-cont save-result__cont">
-            <div class="form-row-flex">
-                <button type="submit" href="" class="modal-button save-result__btn">Сохранить и посмотреть
-                    результат</button>
-                <div class="big-checkbox">
-                    <input type="checkbox" style="width: 20px;" name="consent-processing"
-                        id="consent-processing" class="form-input checkbox-input"></select>
-                    <label for="current-work-checkbox-checkbox" class="form-label">Согласен
-                        с Политикой обработки персональных
-                        данных и даю Согласие на обработку персональных данных.</label>
+        <form id="form">
+            <div class="forms-layout" id="forms-layout"></div>
+            <div class="form-cont save-result__cont">
+                <div class="form-row-flex">
+                    <button type="submit" id="createDoc" class="modal-button save-result__btn">Сохранить и посмотреть
+                        результат</button>
+                    <div class="big-checkbox">
+                        <input type="checkbox" style="width: 20px;" name="consent-processing" id="consent-processing"
+                            class="form-input checkbox-input"></select>
+                        <label for="consent-processing" class="form-label">Согласен
+                            с Политикой обработки персональных
+                            данных и даю Согласие на обработку персональных данных.</label>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
         <script src="{{ url_for('static', filename='scripts/constructors-generator.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/constructor.js') }}"></script>
+        <script type="text/javascript">
+            const constructorConfig = {{ constructorConfig| tojson}};
+
+            constructorConfig.forEach(form => {
+                if (form.type == 'dynamic') {
+                    generateDynamicForm(form);
+                } else {
+                    generateForm(form);
+                }
+            });
+
+            loadValues({{values| tojson}}, constructorConfig);
+        </script>
     </div>
 </section>
 

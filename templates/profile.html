@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="profile">
+    <div class="container">
+        <div class="profile__left-side">
+            <div class="profile__title">
+                <h1 class="title__user-name">{{session['user-name']}} Username</h1>
+                <div class="title__underscore">
+                    <img src="{{ url_for('static', filename='images/check.svg') }}" alt=""
+                        class="title-underscore__icon">
+                    <p class="title-underscore__text">Вы находитесь в личном кабинете</p>
+                </div>
+                <p class="title__text"> – здесь размещены все Ваши созданные<br /> документы, а также доступны настройки
+                    аккаунта
+                </p>
+            </div>
+            <div class="profile-docs">
+                <div class="profile-docs__title-cont">
+                    <div class="profile-docs__title">
+                        <img src="{{ url_for('static', filename='images/plagiarism.svg') }}" alt=""
+                            class="profile-docs__title-icon">
+                        <p class="profile-docs__title-text title-underscore__text">Мои документы</p>
+                    </div>
+                    <a href="{{url_for('documents')}}"
+                        class="resume-templates__btn-text profile-docs__create-btn">Создать новый</a>
+                </div>
+                <div class="cards-container">
+                    {% for item in userDocs %}
+                    <div class="doc-card" value="{{item.id}}">
+                        <div class="doc-card__info">
+                            <img src="{{item.imgLink}}" alt="" class="doc-card__img">
+                            <div class="card-info__panel">
+                                <p class="card-info__text">{{item.title}}</p>
+                                <div class="card-actions">
+                                    <button class="doc__edit doc-btn">
+                                        <img src="{{ url_for('static', filename='images/edit.svg') }}" alt=""
+                                            class="doc-action__icon">
+                                        <p class="doc-action__text">Редактировать</p>
+                                    </button>
+                                    <button class="doc__save doc-btn" onclick="downloadFile('pdf', '{{item.id}}')">
+                                        <img src="{{ url_for('static', filename='images/file_save.svg') }}" alt=""
+                                            class="doc-action__icon">
+                                        <p class="doc-action__text">Скачать</p>
+                                    </button>
+                                    <button class="doc__delete doc-btn" onclick="deleteFile('{{item.id}}')">
+                                        <img src="{{ url_for('static', filename='images/delete.svg') }}" alt=""
+                                            class="doc-action__icon">
+                                        <p class="doc-action__text">Удалить</p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doc__time-edit">Обновлено: {{item.lastEdit.strftime("%d.%m.%Y")}} в
+                            {{item.lastEdit.strftime("%H:%M")}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="payments">
+                <div class="payments__title profile-docs__title">
+                    <img src="{{ url_for('static', filename='images/account_box.svg') }}" alt=""
+                        class="profile-docs__title-icon profile-docs__title-icon">
+                    <p class="profile-docs__title-text title-underscore__text">Оплаты</p>
+                </div>
+                <table class=" payments__table table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Сумма</th>
+                            <th scope="col">Время</th>
+                            <th scope="col">Тип</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in payments %}
+                        <tr>
+                            <td scope="row">{{item.amount}}</td>
+                            <td>{{item.date.strftime("%d.%m.%Y %H:%M")}}</td>
+                            <td>{{item.type}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <div class="profile__right-side">
+            <div class="profile-docs__title">
+                <img src="{{ url_for('static', filename='images/plagiarism.svg') }}" alt=""
+                    class="profile-docs__title-icon">
+                <p class="profile-docs__title-text title-underscore__text">Информация</p>
+            </div>
+            <p class="title__text m0">Ваш статус:</p>
+            <p class="title__text mb20">{{session['user'].status}}</p>
+            <p class="title__text m0">Ваш логин:</p>
+            <p class="title__text mb20">{{session['user'].login}}</p>
+            <p class="title__text m0">Email:</p>
+            <p class="title__text mb20">{{session['user'].emal}}</p>
+            <p class="title__text m0">Зарегистрирован:</p>
+            <p class="title__text mb20">{{session['user'].dateRegistration}}</p>
+            <p class="title__text m0">Лимиты скачивания:</p>
+            <p class="title__text mb20">Осталось {{session['user'].amountAttempts}} попыток для скачивания</p>
+            <div class="profile__important-info">
+                <p class="profile-docs__title-text title-underscore__text">Важная информация:</p>
+                <p class="title__text">Личный кабинет автоматически удаляется с сайта через 30 дней неактивности.
+                    Этот
+                    срок
+                    считается с момента последнего входа или обновления данных. То есть, если вы входите в систему и
+                    обновляете свои данные, срок хранения продлевается. Однако, как только с последнего входа или
+                    обновления
+                    пройдет 30 дней, ваши данные автоматически удаляются с наших серверов.</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='scripts/file.js') }}"></script>
+{% endblock %}

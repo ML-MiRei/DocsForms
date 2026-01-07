@@ -8,48 +8,14 @@
         <h2 class="section_title">Резюме</h2>
 
         <div class="slider">
-            <div class="item">
+            {% for item in resumeTemplates %}
+            <div class="item" value="{{item.id}}">
                 <div class="resume__item">
-                    <img src="{{ url_for('static', filename='images/resume_templates/1.svg') }}" alt=""
+                    <img src="{{item.imgLink}}" alt=""
                         class="swiper-slide__img">
                 </div>
             </div>
-            <div class="item">
-                <div class="resume__item">
-                    <img src="{{ url_for('static', filename='images/resume_templates/2.svg') }}" alt=""
-                        class="swiper-slide__img">
-                </div>
-            </div>
-            <div class="item">
-                <div class="resume__item">
-                    <img src="{{ url_for('static', filename='images/resume_templates/5.svg') }}" alt=""
-                        class="swiper-slide__img">
-                </div>
-            </div>
-            <div class="item">
-                <div class="resume__item">
-                    <img src="{{ url_for('static', filename='images/resume_templates/6.svg') }}" alt=""
-                        class="swiper-slide__img">
-                </div>
-            </div>
-            <div class="item">
-                <div class="resume__item">
-                    <img src="{{ url_for('static', filename='images/resume_templates/8.svg') }}" alt=""
-                        class="swiper-slide__img">
-                </div>
-            </div>
-            <div class="item">
-                <div class="resume__item">
-                    <img src="{{ url_for('static', filename='images/resume_templates/9.svg') }}" alt=""
-                        class="swiper-slide__img">
-                </div>
-            </div>
-            <div class="item">
-                <div class="resume__item">
-                    <img src="{{ url_for('static', filename='images/resume_templates/10.svg') }}" alt=""
-                        class="swiper-slide__img">
-                </div>
-            </div>
+            {% endfor %}
             <div class="swipe-prev swipe_arrow" id="prev">
                 <img src="{{ url_for('static', filename='images/left_arrow.svg') }}" alt="" class="swipe__arrow-img">
             </div>
@@ -57,11 +23,8 @@
                 <img src="{{ url_for('static', filename='images/right_arrow.svg') }}" alt="" class="swipe__arrow-img">
             </div>
         </div>
-
-
-
         <div class="resume-templates__btn">
-            <a href="" class="resume-templates__btn-text">выбрать</a>
+            <button id="selectButton" class="resume-templates__btn-text">выбрать</button>
         </div>
     </section>
     <section class="statements">

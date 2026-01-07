@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -28,8 +27,9 @@
                 </a>
                 <nav class="header_menu">
                     <ul class="menu__list">
-                        <li class="menu__item"><a href="/" class="menu__link">Главная</a></li>
-                        <li class="menu__item"><a href="/form" class="menu__link">Форма</a></li>
+                        <li class="menu__item"><a href="{{url_for('home')}}" class="menu__link">Главная</a></li>
+                        <li class="menu__item"><a href="{{url_for('documents')}}" class="menu__link">Конструктор</a>
+                        </li>
                     </ul>
                 </nav>
                 <div class="header__actions">
@@ -38,11 +38,20 @@
                             class="actions-btn__logo">
                         <span class="actions-btn__title">Помощь</span>
                     </button>
-                    <button class="header__actions-btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    {% if session.get('user'): %}
+                    <a href="{{url_for('profile')}}" class="header__actions-btn" name="headerLoginButton">
                         <img src="{{ url_for('static', filename='images/person.svg') }}" alt=""
                             class="actions-btn__logo">
-                        <span class="actions-btn__title">Войти</span>
+                        <span class="actions-btn__title" id="log-button__text">{{session['user'].name}}</span>
+                    </a>
+                    {% else %}
+                    <button class="header__actions-btn" name="headerLoginButton" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">
+                        <img src="{{ url_for('static', filename='images/person.svg') }}" alt=""
+                            class="actions-btn__logo">
+                        <span class="actions-btn__title" id="log-button__text">Войти</span>
                     </button>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -86,10 +95,9 @@
                 <div class="footer__navigation">
                     <h5 class="footer__title">Навигация</h5>
                     <ul class="footer-navigation__list">
-                        <li class="footer-list__item">Страница 1</li>
-                        <li class="footer-list__item">Страница 1</li>
-                        <li class="footer-list__item">Страница 1</li>
-                        <li class="footer-list__item">Страница 1</li>
+                        <li class="footer-list__item"><a href="{{url_for('home')}}" class="menu__link">Главная</a></li>
+                        <li class="footer-list__item"><a href="{{url_for('documents')}}"
+                                class="menu__link">Конструктор</a></li>
                     </ul>
                 </div>
                 <div class="footer__info">
@@ -102,8 +110,19 @@
                 <div class="footer__auth">
                     <h5 class="footer__title">Авторизация</h5>
                     <ul class="footer-auth__list">
-                        <li class="footer-list__item">Регистрация</li>
-                        <li class="footer-list__item">Личный кабинет</li>
+                        {% if session.get('user'): %}
+                        <li class="footer-list__item"><a href="{{url_for('profile')}}" class="menu__link">Личный
+                                кабинет</a></li>
+                        <li class="footer-list__item"><button style="background-color: transparent; padding: 0;"
+                                data-bs-toggle="modal" data-bs-target="#logoutModal" class="menu__link"
+                                class="menu__link">Выход</button></li>
+                        {% else %}
+                        <li class="footer-list__item"><a href="{{url_for('registration')}}"
+                                class="menu__link">Регистрация</a></li>
+                        <li class="footer-list__item"><button style="background-color: transparent; padding: 0;"
+                                data-bs-toggle="modal" data-bs-target="#loginModal" class="menu__link">Вход</button>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -115,94 +134,116 @@
         </div>
     </footer>
 
-
-
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-container">
-                    <h1 class="modal-title">Вход в личный кабинет</h1>
-                    <form id="loginForm">
-                        <div class="form-group">
-                            <label for="login">Введите логин</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="modalLogin" class="form-input" placeholder="Введите ваш логин"
-                                    required>
-                            </div>
-                            <div class="error-message" id="loginError">Логин</div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="passwor__header">
-                                <label for="password">Введите пароль</label>
-                                <a href="#" class="forgot-link">Забыли пароль?</a>
-                            </div>
-
-                            <div class="input-wrapper">
-                                <input type="password" id="logPassword" class="form-input" placeholder="Введите ваш пароль"
-                                    required>
-                                <button type="button" class="password-toggle" id="togglePassword">Показать</button>
-                            </div>
-                            <div class="error-message" id="passwordError">Пожалуйста, введите пароль</div>
-                        </div>
-
-                        <button type="submit" class="login-button modal-button">Войти</button>
-                    </form>
-
-                    <div class="autn__bottom">
-                        <div class="register-prompt">
-                            Еще нет личного кабинета?<br>
-                            Зарегистрируйтесь прямо сейчас!
-                        </div>
-
-                        <button class="register-button" id="registerButton">
-                            <span class="register-button__text">Зарегистрироваться</span>
-                            <img src="{{ url_for('static', filename='images/add-user.png') }}" alt="" class="reg__icon">
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-container">
-                    <h1 class="modal-title">Поддержка</h1>
-                    <form id="supportForm" class="modal-form">
-                        <div class="form-group">
-                            <label for="email">Введите почту</label>
-                            <div class="input-wrapper">
-                                <input type="email" id="supEmail" class="form-input" placeholder="example@gmail.com"
-                                    required>
-                            </div>
-                            <div class="error-message" id="supEmailError">Некорректный e-mail</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Введите вопрос</label>
-                            <div class="input-wrapper">
-                                <textarea type="text" id="supMessage" class="form-input support-message__imput" placeholder="Опишите проблему"
-                                    required></textarea>
-                            </div>
-                            <div class="error-message" id="supMessageError">Пожалуйста, опишите свою проблему</div>
-                        </div>
-
-                        <button type="submit" class="support-button modal-button">Отправить</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {% block scripts %} {% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='scripts/validator.js') }}"></script>
+    {% block scripts %}{% endblock %}
 
 </body>
+
+
+<!--modals-->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-container">
+                <h1 class="modal-title">Вход в личный кабинет</h1>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="login">Введите логин</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="modalLogin" class="form-input" placeholder="Введите ваш логин"
+                                required>
+                        </div>
+                        <div class="error-message" id="loginError">Логин</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="passwor__header">
+                            <label for="password">Введите пароль</label>
+                            <a href="#" class="forgot-link">Забыли пароль?</a>
+                        </div>
+
+                        <div class="input-wrapper">
+                            <input type="password" id="logPassword" class="form-input" placeholder="Введите ваш пароль"
+                                required>
+                            <button type="button" class="password-toggle" value="logPassword"
+                                id="togglePassword">Показать</button>
+                        </div>
+                        <div class="error-message" id="passwordError">Пожалуйста, введите пароль</div>
+                    </div>
+
+                    <button type="submit" class="login-button modal-button">Войти</button>
+                </form>
+
+                <div class="autn__bottom">
+                    <div class="register-prompt">
+                        Еще нет личного кабинета?<br>
+                        Зарегистрируйтесь прямо сейчас!
+                    </div>
+
+                    <a class="register-button" href="{{url_for('registration')}}" id="registerButton">
+                        <span class="register-button__text">Зарегистрироваться</span>
+                        <img src="{{ url_for('static', filename='images/add-user.png') }}" alt="" class="reg__icon">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts/login.js') }}"></script>
+</div>
+
+<div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-container">
+                <h1 class="modal-title">Поддержка</h1>
+                <form id="supportForm" class="modal-form">
+                    <div class="form-group">
+                        <label for="email">Введите почту</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="supEmail" class="form-input" placeholder="example@gmail.com"
+                                required>
+                        </div>
+                        <div class="error-message" id="supEmailError">Некорректный e-mail</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Введите вопрос</label>
+                        <div class="input-wrapper">
+                            <textarea type="text" id="supMessage" class="form-input support-message__imput"
+                                placeholder="Опишите проблему" required></textarea>
+                        </div>
+                        <div class="error-message" id="supMessageError">Пожалуйста, опишите свою проблему</div>
+                    </div>
+
+                    <button type="submit" class="support-button modal-button">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts/support.js') }}"></script>
+</div>
+
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-container">
+                <h1 class="modal-title">Выход</h1>
+                <div class="modal-title" style="font-weight: 400; text-align: left;">Вы уверены, что хотите выйти из профиля?</div>
+                <div style="justify-content: space-between; display: flex; margin-top: 10px;">
+                    <button id="logoutBtn" type="submit" class="login-button modal-button">Выйти</button>
+                    <button id="logoutCancelBtn" type="cancel" class="login-button modal-button">Отмена</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts/logout.js') }}"></script>
+</div>
 
 </html>

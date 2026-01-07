@@ -1,17 +1,10 @@
-const years = [
-    { value: '', text: '2030' },
-    { value: '2030', text: '2030' },
-    { value: '2029', text: '2029' },
-    { value: '2028', text: '2028' },
-    { value: '2027', text: '2027' },
-    { value: '2026', text: '2026' },
-    { value: '2025', text: '2025' },
-    { value: '2024', text: '2024' },
-    { value: '2023', text: '2023' },
-    { value: '2022', text: '2022' },
-    { value: '2021', text: '2021' },
-    { value: '2020', text: '2020' }
-];
+const years = [];
+for (let i = 2026; i >= 1960; i--) {
+    years.push({
+        value: i,
+        text: i
+    });
+}
 
 const months = [
     { value: '1', text: 'Январь' },
@@ -28,582 +21,17 @@ const months = [
     { value: '12', text: 'Декабрь' }
 ];
 
-const educationForm = {
-    id: 'education',
-    title: 'Образование',
-    fieldGroups: [
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'institution-name',
-                    label: 'Название учебного заведения',
-                    placeholder: 'Введите название учебного заведения',
-                    type: 'text',
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'faculty',
-                    label: 'Факультет',
-                    placeholder: 'Введите название факультета',
-                    type: 'text',
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'specialty',
-                    label: 'Специальность',
-                    placeholder: 'Введите название специальности',
-                    type: 'text',
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'start-year',
-                    label: 'Год начала:',
-                    type: 'select',
-                    options: [
-                        { value: '', text: '2025' },
-                        { value: '2025', text: '2025' },
-                        { value: '2024', text: '2024' },
-                        { value: '2023', text: '2023' },
-                        { value: '2022', text: '2022' },
-                        { value: '2021', text: '2021' },
-                        { value: '2020', text: '2020' },
-                        { value: '2019', text: '2019' },
-                        { value: '2018', text: '2018' },
-                        { value: '2017', text: '2017' },
-                        { value: '2016', text: '2016' },
-                        { value: '2015', text: '2015' }
-                    ],
-                    required: false
-                },
-                {
-                    id: 'end-year',
-                    label: 'Год окончания:',
-                    type: 'select',
-                    options: [
-                        { value: '', text: '2030' },
-                        { value: '2030', text: '2030' },
-                        { value: '2029', text: '2029' },
-                        { value: '2028', text: '2028' },
-                        { value: '2027', text: '2027' },
-                        { value: '2026', text: '2026' },
-                        { value: '2025', text: '2025' },
-                        { value: '2024', text: '2024' },
-                        { value: '2023', text: '2023' },
-                        { value: '2022', text: '2022' },
-                        { value: '2021', text: '2021' },
-                        { value: '2020', text: '2020' }
-                    ],
-                    required: false
-                },
-                {
-                    id: 'education-form',
-                    label: 'Форма обучения:',
-                    type: 'select',
-                    options: [
-                        { value: '', text: 'Не выбрано' },
-                        { value: 'full-time', text: 'Очная' },
-                        { value: 'evening', text: 'Очно-заочная (вечерняя)' },
-                        { value: 'correspondence', text: 'Заочная' },
-                        { value: 'distance', text: 'Дистанционная' }
-                    ],
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'education-achievements',
-                    label: 'Достижения:',
-                    placeholder: 'Введите достижения',
-                    type: 'textarea',
-                    rows: 4,
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'education-note',
-                    label: 'Не используйте посторонние символы. Ставьте на конце предыдущего достижения точку (.) или точку с запятой (;)',
-                    type: 'warning-message',
-                    required: false
-                }
-            ]
-        }
-    ]
-};
-
-const extraEducationForm = {
-    id: 'extra-education',
-    title: 'Дополнительное бразование',
-    fieldGroups: [
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'institution-name',
-                    label: 'Название курса или тренинга',
-                    placeholder: 'Введите название курса',
-                    type: 'text',
-                    required: true
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'faculty',
-                    label: 'Организация, проводившая курс или тренинг',
-                    placeholder: 'Введите название учебного заведения',
-                    type: 'text',
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'end-year',
-                    label: 'Год окончания:',
-                    type: 'select',
-                    options: years,
-                    required: true
-                },
-                {
-                    id: 'education-time',
-                    label: 'Продолжительность обучения',
-                    placeholder: 'Продолжительность обучения',
-                    type: 'text',
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'education-achievements',
-                    label: 'Достижения:',
-                    placeholder: 'Введите достижения',
-                    type: 'textarea',
-                    rows: 4,
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'education-note',
-                    label: 'Не используйте посторонние символы. Ставьте на конце предыдущего достижения точку (.) или точку с запятой (;)',
-                    type: 'warning-message',
-                    required: false
-                }
-            ]
-        }
-    ]
-};
-
-const workExpirienceForm = {
-    id: 'work-experience',
-    title: 'Опыт работы',
-    fieldGroups: [
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'work-period-from-month',
-                    label: 'Период работы',
-                    type: 'date-month-select',
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'current-work-checkbox',
-                    label: 'Работаю в настоящее время',
-                    type: 'checkbox',
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'position-held',
-                    label: 'Какую должность занимали?',
-                    placeholder: 'Введите должность',
-                    type: 'text',
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'organization-name',
-                    label: 'Название организации',
-                    placeholder: 'Введите название компании',
-                    type: 'text',
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'responsibilities',
-                    label: 'Обязанности',
-                    placeholder: 'Введите обязанности, которые Вы выполняли на предыдущем месте работы',
-                    type: 'textarea',
-                    rows: 4,
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'responsibilities-note',
-                    label: 'Не используйте посторонние символы. Ставьте на конце предыдущей обязанности точку (.) или точку с запятой (;)',
-                    type: 'warning-message',
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'flex',
-            fields: [
-                {
-                    id: 'achievements',
-                    label: 'Достижения',
-                    placeholder: 'Введите достижения, которые по Вашему мнению и компании наиболее значимы',
-                    type: 'textarea',
-                    rows: 4,
-                    required: false
-                }
-            ]
-        },
-        {
-            type: 'warning-message',
-            fields: [
-                {
-                    id: 'achievements-note',
-                    label: 'Не используйте посторонние символы. Ставьте на конце предыдущего достижения точку (.) или точку с запятой (;)',
-                    type: 'warning-message',
-                    required: false
-                }
-            ]
-        }
-    ]
-};
-
-const resumeFormsConfig = [
-    {
-        id: 'general-info',
-        title: 'Общая информация',
-        fieldGroups: [
-            {
-                type: 'grid',
-                fields: [
-                    {
-                        id: 'last-name',
-                        label: 'Фамилия (обязательно)',
-                        placeholder: 'Иванов',
-                        type: 'text',
-                        required: true
-                    },
-                    {
-                        id: 'patronymic',
-                        label: 'Отчество',
-                        placeholder: 'Иванович',
-                        type: 'text',
-                        required: false
-                    }
-                ]
-            },
-            {
-                type: 'grid',
-                fields: [
-                    {
-                        id: 'name',
-                        label: 'Имя (обязательно)',
-                        placeholder: 'Иван',
-                        type: 'text',
-                        required: true
-                    },
-                    {
-                        id: 'picture',
-                        type: 'picture',
-                        required: true
-                    }
-                ]
-            }
-
-        ]
-    },
-    {
-        id: 'private-info',
-        title: 'Личная информация',
-        fieldGroups: [
-            {
-                type: 'grid',
-                fields: [
-                    {
-                        id: 'city',
-                        label: 'Город проживания (обязательно)',
-                        placeholder: 'Название города',
-                        type: 'text',
-                        required: true
-                    },
-                    {
-                        id: 'citizenship',
-                        label: 'Гражданство (обязательно)',
-                        placeholder: 'Российская Федерация',
-                        type: 'text',
-                        required: true
-                    }
-                ]
-            },
-            {
-                type: 'grid',
-                fields: [
-                    {
-                        id: 'removal',
-                        label: 'Переезд',
-                        type: 'select',
-                        options: [
-                            { value: '', text: 'Переезд невозможен' },
-                            { value: 'possible', text: 'Переезд возможен' },
-                            { value: 'unwanted', text: 'Переезд нежелателен' },
-                            { value: 'desired', text: 'Переезд желателен' }
-                        ],
-                        required: false
-                    },
-                    {
-                        id: 'birth-date',
-                        label: 'Дата рождения',
-                        placeholder: 'ДД.ММ.ГГГГ',
-                        type: 'date',
-                        required: false
-                    },
-                ]
-            },
-            {
-                type: 'grid',
-                fields: [
-                    {
-                        id: 'family-status',
-                        label: 'Семейное положение',
-                        type: 'select',
-                        options: [
-                            { value: '', text: 'Не указано' },
-                            { value: 'single', text: 'Холост / Не замужем' },
-                            { value: 'married', text: 'Женат / Замужем' },
-                            { value: 'divorced', text: 'Разведен(а)' }
-                        ],
-                        required: false
-                    },
-                    {
-                        id: 'gender',
-                        label: 'Пол',
-                        type: 'select',
-                        options: [
-                            { value: '', text: 'Выберите пол' },
-                            { value: 'male', text: 'Мужской' },
-                            { value: 'female', text: 'Женский' }
-                        ],
-                        required: false
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        id: 'contact-info',
-        title: 'Контактная информация',
-        fieldGroups: [
-            {
-                type: 'grid',
-                fields: [
-                    {
-                        id: 'phone',
-                        label: 'Номер телефона (обязательно)',
-                        placeholder: '+7 123 456 78 90',
-                        type: 'tel',
-                        required: true
-                    },
-                    {
-                        id: 'email',
-                        label: 'Электронная почта (обязательно)',
-                        placeholder: 'email@pochta-site.ru',
-                        type: 'email',
-                        required: true
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        id: 'position-info',
-        title: 'Информация о должности',
-        fieldGroups: [
-            {
-                type: 'flex',
-                fields: [
-                    {
-                        id: 'position',
-                        label: 'Должность',
-                        placeholder: 'Введите должность',
-                        type: 'text',
-                        required: false
-                    }
-                ]
-            },
-            {
-                type: 'flex',
-                fields: [
-                    {
-                        id: 'position-note',
-                        type: 'warning-message',
-                        label: 'Одно резюме – одна должность. Под каждую новую позицию создавайте отдельный документ – это позволит чётко адаптировать описание вашего опыта и компетенций под требования работодателя.',
-                        required: false
-                    }
-                ]
-            },
-            {
-                type: 'grid',
-                fields: [
-                    {
-                        id: 'employment-type',
-                        label: 'Тип занятости',
-                        type: 'select',
-                        options: [
-                            { value: '', text: 'Выберите тип занятости' },
-                            { value: 'full', text: 'Полная' },
-                            { value: 'part', text: 'Частичная' },
-                            { value: 'internship', text: 'Стажировка' },
-                            { value: 'seasonal', text: 'Сезонная' },
-                            { value: 'project', text: 'Проектная' },
-                            { value: 'volunteer', text: 'Волонтерство' },
-                            { value: 'temporary', text: 'Временная' },
-                            { value: 'remote', text: 'Удаленная' }
-                        ],
-                        required: false
-                    },
-                    {
-                        id: 'work-schedule',
-                        label: 'График работы',
-                        type: 'select',
-                        options: [
-                            { value: '', text: 'Выберите график' },
-                            { value: 'full-day', text: 'Полный день' },
-                            { value: 'shift', text: 'Сменный график' },
-                            { value: 'flexible', text: 'Гибкий график' },
-                            { value: 'remote-work', text: 'Удаленная работа' },
-                            { value: 'part-time', text: 'Неполный день' }
-                        ],
-                        required: false
-                    }
-                ]
-            },
-            {
-                type: 'flex',
-                fields: [
-                    {
-                        id: 'salary',
-                        placeholder: 'Введите сумму',
-                        label: 'Желаемая зарплата',
-                        type: 'numeric',
-                        required: false
-                    },
-                    {
-                        id: 'currency',
-                        label: 'Валюта',
-                        type: 'select',
-                        options: [
-                            { value: 'rub', text: 'Рублей' },
-                            { value: 'tenge', text: 'Тенге' },
-                            { value: 'usd', text: 'Долларов' },
-                            { value: 'eur', text: 'Евро' },
-                            { value: 'uah', text: 'Гривен' }
-                        ],
-                        required: false
-                    }
-                ]
-            },
-            {
-                type: 'flex',
-                fields: [
-                    {
-                        id: 'salary-option',
-                        label: 'По договоренности',
-                        type: 'checkbox',
-                        required: false
-                    }
-                ]
-            }
-
-        ]
-    }
-];
-
-
-var educForms = new Map();
-var extraEducForms = new Map();
-var worcExpForms = new Map();
 
 var countCreatedForms = 0;
+var dynamicForms = new Map();
 
 
-
-const addEducButton = document.getElementById('addEducation');
-const addExtraEducButton = document.getElementById('addExtraEducation');
-const addWorkExpButton = document.getElementById('addWorkExpirience');
-
-addEducButton.addEventListener('click', createEducationForm);
-addWorkExpButton.addEventListener('click', createWorkExpForm);
-addExtraEducButton.addEventListener('click', createExtraEducationForm);
-
-
-
-
-function createFieldsGroup(fieldsGroupConfig) {
+function createFieldsGroup(fieldsGroupConfig, postfix = '') {
     const fieldsCont = document.createElement('div');
     fieldsCont.className = fieldsGroupConfig.type == 'grid' ? 'form-row-grid' : 'form-row-flex';
 
     fieldsGroupConfig.fields.forEach(fieldConfig => {
-        const fieldElement = createFormField(fieldConfig);
+        const fieldElement = createFormField(fieldConfig, postfix);
         fieldsCont.appendChild(fieldElement);
     });
 
@@ -615,7 +43,7 @@ function createWarningMessage(message) {
     messageCont.style.display = 'flex';
     messageCont.className = 'warning-message';
     const icon = document.createElement('img');
-    icon.src = 'static/images/error.svg';
+    icon.src = '/static/images/error.svg';
 
     const textField = document.createElement('p');
     textField.textContent = message;
@@ -647,33 +75,47 @@ function createSelectField(fieldConfig, options = []) {
         inputElement.appendChild(optionElement);
     });
 
+    if (fieldConfig.value)
+        inputElement.value = fieldConfig.value;
+
     return inputElement;
 }
 
-function createTextarea() {
+function createTextarea(fieldConfig) {
     let inputElement = document.createElement('textarea');
     inputElement.className = 'constructor__textarea';
+    inputElement.required = fieldConfig.required;
+
+    if (fieldConfig.value)
+        inputElement.text = fieldConfig.value;
 
     return inputElement;
 }
 
-function createInputField(type) {
+function createInputField(fieldConfig) {
     let inputElement = document.createElement('input');
-    inputElement.type = type;
+    inputElement.type = fieldConfig.type;
+    inputElement.required = fieldConfig.required;
+
+    if (fieldConfig.value)
+        inputElement.text = fieldConfig.value;
 
     return inputElement;
 }
 
-function createChekboxField() {
+function createChekboxField(fieldConfig) {
     let inputElement = document.createElement('input');
     inputElement.type = 'checkbox';
     inputElement.className = 'checkbox-input';
     inputElement.style.width = '20px';
 
+    if (fieldConfig.value)
+        inputElement.value = fieldConfig.value;
+
     return inputElement;
 }
 
-function createFormField(fieldConfig) {
+function createFormField(fieldConfig, postfix = '') {
 
     if (fieldConfig.type == 'picture') {
         return createPhotoUploadComponent(fieldConfig.id);
@@ -688,14 +130,14 @@ function createFormField(fieldConfig) {
             inputElement = createSelectField(fieldConfig);
             break;
         case 'date-month-select':
-            inputElement = createMonthPeriodPicker(fieldConfig.id);
+            inputElement = createMonthPeriodPicker(fieldConfig);
             inputElement.className = 'period-cont transparent-background '
             break;
         case 'textarea':
-            inputElement = createTextarea();
+            inputElement = createTextarea(fieldConfig);
             break;
         case 'checkbox':
-            inputElement = createChekboxField();
+            inputElement = createChekboxField(fieldConfig);
 
             label.style.display = 'flex';
             label.style.marginLeft = '15px';
@@ -706,14 +148,14 @@ function createFormField(fieldConfig) {
         case 'warning-message':
             fieldGroup.appendChild(createWarningMessage(fieldConfig.label));
             return fieldGroup;
-        case 'numeric':
-            inputElement = createInputField('number');
+        case 'number':
+            inputElement = createInputField(fieldConfig);
             break;
         default:
-            inputElement = createInputField(fieldConfig.type);
+            inputElement = createInputField(fieldConfig);
     }
 
-    label.htmlFor = fieldConfig.id;
+    label.htmlFor = fieldConfig.id + postfix;
     label.textContent = fieldConfig.label;
     label.className += 'form-label';
 
@@ -723,8 +165,8 @@ function createFormField(fieldConfig) {
 
     inputElement.className = inputElement.className == null ?
         'form-input' : inputElement.className + ' form-input';
-    inputElement.id = fieldConfig.id;
-    inputElement.name = fieldConfig.id;
+    inputElement.id = fieldConfig.id + postfix;
+    inputElement.name = fieldConfig.id + postfix;
 
     if (fieldConfig.placeholder) {
         inputElement.placeholder = fieldConfig.placeholder;
@@ -753,7 +195,7 @@ function createFormField(fieldConfig) {
 
 function generateForm(formConfig) {
     const cont = document.getElementById('forms-layout');
-    const form = document.createElement('form');
+    const form = document.createElement('div');
     form.id = formConfig.id;
     form.className = 'form-cont';
 
@@ -772,14 +214,41 @@ function generateForm(formConfig) {
     cont.appendChild(form);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    resumeFormsConfig.forEach(form => {
-        generateForm(form);
+function generateDynamicForm(formConfig) {
+    const cont = document.getElementById('forms-layout');
+    const form = document.createElement('div');
+    form.id = formConfig.id + '-forms-cont';
+    form.className = 'form-cont';
+
+    const title = document.createElement('h2');
+    title.className = 'form-title';
+    title.textContent = formConfig.title;
+
+    const addButton = document.createElement('button');
+    addButton.id = 'add' + formConfig.id;
+    addButton.value = formConfig.id;
+    addButton.className = "modal-button reverse-btn";
+    addButton.innerText = '+ Добавить';
+
+    dynamicForms.set(formConfig.id, {
+        'map': new Map(),
+        'formConfig': formConfig
     });
-});
+
+    addButton.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        addDynamicForm(ev.target.value);
+    });
 
 
-function createPhotoUploadComponent(inputId = 'photo-input', logoUrl = 'static/images/account_box.svg') {
+    form.innerHTML = '';
+    form.appendChild(title);
+    form.appendChild(addButton);
+
+    cont.appendChild(form);
+}
+
+function createPhotoUploadComponent(inputId = 'photo-input', logoUrl = '/static/images/account_box.svg') {
     const container = document.createElement('div');
     container.className = 'photo-upload-container';
 
@@ -957,7 +426,7 @@ function addEventListeners(container, inputId) {
 }
 
 
-function createMonthPeriodPicker(id) {
+function createMonthPeriodPicker(fieldConfig) {
     const pickerContainer = document.createElement('div');
 
     const startDateCont = document.createElement('div');
@@ -965,7 +434,7 @@ function createMonthPeriodPicker(id) {
 
     const startYearInputElement = document.createElement('select');
     startYearInputElement.className = 'form-input';
-    startYearInputElement.id = id + '-start-year';
+    startYearInputElement.id = fieldConfig.id + '-start-year';
     years.forEach(option => {
         const optionElement = document.createElement('option');
         optionElement.value = option.value;
@@ -978,7 +447,7 @@ function createMonthPeriodPicker(id) {
 
     const startMonthInputElement = document.createElement('select');
     startMonthInputElement.className = 'form-input';
-    startMonthInputElement.id = id + '-start-month';
+    startMonthInputElement.id = fieldConfig.id + '-start-month';
     months.forEach(option => {
         const optionElement = document.createElement('option');
         optionElement.value = option.value;
@@ -998,7 +467,7 @@ function createMonthPeriodPicker(id) {
 
     const endYearInputElement = document.createElement('select');
     endYearInputElement.className = 'form-input';
-    endYearInputElement.id = id + '-end-year';
+    endYearInputElement.id = fieldConfig.id + '-end-year';
     years.forEach(option => {
         const optionElement = document.createElement('option');
         optionElement.value = option.value;
@@ -1011,7 +480,7 @@ function createMonthPeriodPicker(id) {
 
     const endMonthInputElement = document.createElement('select');
     endMonthInputElement.className = 'form-input';
-    endMonthInputElement.id = id + '-end-month';
+    endMonthInputElement.id = fieldConfig.id + '-end-month';
     months.forEach(option => {
         const optionElement = document.createElement('option');
         optionElement.value = option.value;
@@ -1028,70 +497,16 @@ function createMonthPeriodPicker(id) {
     pickerContainer.appendChild(startDateCont);
     pickerContainer.appendChild(endDateCont);
 
+    if (fieldConfig.value) {
+        startMonthInputElement = fieldConfig[0].getMonth();
+        startYearInputElement = fieldConfig[0].getFullYear();
+        endMonthInputElement.value = fieldConfig[1].getMonth();
+        endYearInputElement.value = fieldConfig[1].getFullYear();
+    }
+
     return pickerContainer;
 }
 
-
-function createEducationForm() {
-    const cont = document.getElementById('education-forms-layout');
-    const children = cont.children;
-
-    const form = document.createElement('form');
-    form.id = educationForm.id + '-' + countCreatedForms;
-    form.className = 'form-cont';
-
-    educationForm.fieldGroups.forEach(fieldGroup => {
-        const fieldElement = createFieldsGroup(fieldGroup);
-        form.appendChild(fieldElement);
-    });
-
-    form.appendChild(createDeleteButton(educForms, form.id));
-    cont.insertBefore(form, children[children.length - 1]);
-
-    educForms.set(form.id, form);
-    countCreatedForms += 1;
-}
-
-
-function createExtraEducationForm() {
-    const cont = document.getElementById('extra-education-forms-layout');
-    const children = cont.children;
-
-    const form = document.createElement('form');
-    form.id = extraEducationForm.id + '-' + countCreatedForms;
-    form.className = 'form-cont';
-
-    extraEducationForm.fieldGroups.forEach(fieldGroup => {
-        const fieldElement = createFieldsGroup(fieldGroup);
-        form.appendChild(fieldElement);
-    });
-
-    form.appendChild(createDeleteButton(extraEducForms, form.id));
-    cont.insertBefore(form, children[children.length - 1]);
-
-    extraEducForms.set(form.id, form);
-    countCreatedForms += 1;
-}
-
-function createWorkExpForm() {
-    const cont = document.getElementById('work-exp-forms-layout');
-    const children = cont.children;
-
-    const form = document.createElement('form');
-    form.id = workExpirienceForm.id + '-' + countCreatedForms;
-    form.className = 'form-cont';
-
-    workExpirienceForm.fieldGroups.forEach(fieldGroup => {
-        const fieldElement = createFieldsGroup(fieldGroup);
-        form.appendChild(fieldElement);
-    });
-
-    form.appendChild(createDeleteButton(worcExpForms, form.id));
-    cont.insertBefore(form, children[children.length - 1]);
-
-    worcExpForms.set(form.id, form);
-    countCreatedForms += 1;
-}
 
 function createDeleteButton(map, id) {
     var deleteButton = document.createElement('button');
@@ -1106,4 +521,44 @@ function createDeleteButton(map, id) {
     deleteButton.className = 'modal-button save-result__btn';
 
     return deleteButton;
+}
+
+
+function loadValues(values, configFields) {
+    let el;
+    values.forEach(item => {
+        if (item.type == 'field') {
+            el = document.getElementById(item.id);
+            el.value = item.value;
+        }
+        else if (item.type == 'form') {
+            var form = configFields.find(f => f.id === item.id);
+            addDynamicForm(form.id);
+            item.value.forEach(field => {
+                el = document.getElementById(field.id + (countCreatedForms - 1));
+                el.value = field.value;
+            })
+        }
+    });
+}
+
+
+function addDynamicForm(formId) {
+    const cont = document.getElementById(formId + '-forms-cont');
+    const children = cont.children;
+
+    const form = document.createElement('div');
+    form.id = formId + countCreatedForms;
+    form.className = 'form-cont';
+
+    dynamicForms.get(formId).formConfig.fieldGroups.forEach(fieldGroup => {
+        const fieldElement = createFieldsGroup(fieldGroup, countCreatedForms);
+        form.appendChild(fieldElement);
+    });
+
+    form.appendChild(createDeleteButton(dynamicForms.get(formId).map, form.id));
+    cont.insertBefore(form, children[children.length - 1]);
+
+    dynamicForms.get(formId).map.set(form.id, form);
+    countCreatedForms += 1;
 }

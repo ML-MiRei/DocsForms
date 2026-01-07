@@ -1,94 +1,106 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<section class="landing">
+    <div class="container">
+        <h1 class="landing__title">Создайте свой документ по готовым шаблонам</h1>
+        <h5 class="landing__undertitle">- бесплатный конструктор документов</h5>
+        <p class="landing__text">Выделитесь на фоне других претендентов! С помощью нашего конструктора вы быстро
+            создадите аккуратное и структурированное резюме. Это бесплатно, без регистрации и долгих ожиданий.
+            Скачайте результат в PDF или DOCX и будьте на шаг впереди на пути к новой работе.</p>
+        <ul class="landing__info-list">
+            <li class="landing__info-item">
+                <img src="{{ url_for('static', filename='images/overview.svg') }}" alt="" class="info-item__img">
+                <span class="infp-item__text">Быстро заполнить</span>
+            </li>
+            <li class="landing__info-item">
+                <img src="{{ url_for('static', filename='images/file_save.svg') }}" alt="" class="info-item__img">
+                <span class="infp-item__text">Легко скачать</span>
+            </li>
+            <li class="landing__info-item">
+                <img src="{{ url_for('static', filename='images/plagiarism.svg') }}" alt="" class="info-item__img">
+                <span class="infp-item__text">Большой выбор</span>
+            </li>
+        </ul>
+        <div class="landing__btn">
+            <a href="{{url_for('documents')}}" class="landing__btn-text">Создать документ</a>
+        </div>
+    </div>
+</section>
 
-    <section class="landing">
-        <div class="container">
-            <h1 class="landing__title">Создайте свой документ по готовым шаблонам</h1>
-            <h5 class="landing__undertitle">- бесплатный конструктор документов</h5>
-            <p class="landing__text">Выделитесь на фоне других претендентов! С помощью нашего конструктора вы быстро
-                создадите аккуратное и структурированное резюме. Это бесплатно, без регистрации и долгих ожиданий.
-                Скачайте результат в PDF или DOCX и будьте на шаг впереди на пути к новой работе.</p>
-            <ul class="landing__info-list">
-                <li class="landing__info-item">
-                    <img src="{{ url_for('static', filename='images/overview.svg') }}" alt="" class="info-item__img">
-                    <span class="infp-item__text">Быстро заполнить</span>
-                </li>
-                <li class="landing__info-item">
-                    <img src="{{ url_for('static', filename='images/file_save.svg') }}" alt="" class="info-item__img">
-                    <span class="infp-item__text">Легко скачать</span>
-                </li>
-                <li class="landing__info-item">
-                    <img src="{{ url_for('static', filename='images/plagiarism.svg') }}" alt="" class="info-item__img">
-                    <span class="infp-item__text">Большой выбор</span>
-                </li>
-            </ul>
-            <div class="landing__btn">
-                <a href="" class="landing__btn-text">Создать документ</a>
+<section class="info">
+    <div class="container">
+        <h1 class="section__title">Как правильно составить документы для устройства на работу</h1>
+        <p class="section__text">Грамотно оформленные документы — ваш пропуск на желаемую должность. Рассказываем,
+            на
+            что обратить внимание при составлении основных типов бумаг.</p>
+        <ol class="section__list">
+            <li class="section__list-item">
+                <p class="list-item__title">Резюме: Ваша визитная карточка</p>
+                <span class="list-item__text">Главное — структура и релевантность. Работодатель должен за 30 секунд
+                    понять ваш профессиональный путь. Уделите особое внимание достижениям на предыдущих местах
+                    работы, подкрепляя их цифрами и фактами. Избегайте воды и лишней информации.</span>
+            </li>
+            <li class="section__list-item">
+                <p class="list-item__title">Заявление: Официальный тон и краткость</p>
+                <span class="list-item__text">Это формальный документ, который составляется по строгому образцу.
+                    Укажите корректное наименование должности и компании, свои ФИО и дату. Текст должен быть
+                    лаконичным, без эмоциональных оценок и лишних подробностей.</span>
+            </li>
+            <li class="section__list-item">
+                <p class="list-item__title">Договор: Внимание к деталям</p>
+                <span class="list-item__text">Внимательно проверьте все условия: должностные обязанности, размер и
+                    сроки выплаты вознаграждения, режим работы, срок действия договора и условия его расторжения. Не
+                    стесняйтесь задавать уточняющие вопросы работодателю, чтобы избежать недопонимания в
+                    будущем.</span>
+            </li>
+            <li class="section__list-item">
+                <p class="list-item__title">Сопроводительное письмо: Ваше персональное обращение</p>
+                <span class="list-item__text">Это не повторение резюме, а возможность показать мотивацию и интерес к
+                    конкретной компании. Объясните, почему вы хотите работать именно там и чем можете быть полезны.
+                    Персонализируйте обращение, указав имя менеджера по подбору персонала.</span>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<section class="actions">
+    <div class="container">
+        <h1 class="section__title">Универсальный алгоритм для создания любого документа</h1>
+        <p class="section__text">Сервис Doc.Forms поможет вам подготовить безупречные документы всего за три
+            шага:
+        </p>
+        <div class="actions__grid">
+            <div class="actions__left-side">
+                <ol class="section__list">
+                    <li class="section__list-item">
+                        <p class="list-item__title">Выбрать шаблон</p>
+                        <span class="list-item__text">Найдите подходящий образец в нашем каталоге — от резюме до
+                            договора.</span>
+                    </li>
+                    <li class="section__list-item">
+                        <p class="list-item__title">Заполнить поля с данными</p>
+                        <span class="list-item__text">Внесите информацию в готовую профессиональную структуру. Система
+                            подскажет, что и где указать.</span>
+                    </li>
+                    <li class="section__list-item">
+                        <p class="list-item__title">Скачать документ</p>
+                        <span class="list-item__text">Сохраните готовый файл в формате PDF или DOC, чтобы сразу
+                            использовать.</span>
+                    </li>
+                </ol>
+            </div>
+            <div class="actions__right-side">
+                <div class="create-doc__img" style="background-image: url('static/images/document.svg');">
+                    <div class="landing__btn create-doc__btn">
+                        <a href="{{url_for('documents')}}" class="landing__btn-text">Создать документ</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
 
-    <section class="info">
-        <div class="container">
-            <h1 class="section__title">Как правильно составить документы для устройства на работу</h1>
-            <p class="section__text">Грамотно оформленные документы — ваш пропуск на желаемую должность. Рассказываем,
-                на
-                что обратить внимание при составлении основных типов бумаг.</p>
-            <ol class="section__list">
-                <li class="section__list-item">
-                    <p class="list-item__title">Резюме: Ваша визитная карточка</p>
-                    <span class="list-item__text">Главное — структура и релевантность. Работодатель должен за 30 секунд
-                        понять ваш профессиональный путь. Уделите особое внимание достижениям на предыдущих местах
-                        работы, подкрепляя их цифрами и фактами. Избегайте воды и лишней информации.</span>
-                </li>
-                <li class="section__list-item">
-                    <p class="list-item__title">Заявление: Официальный тон и краткость</p>
-                    <span class="list-item__text">Это формальный документ, который составляется по строгому образцу.
-                        Укажите корректное наименование должности и компании, свои ФИО и дату. Текст должен быть
-                        лаконичным, без эмоциональных оценок и лишних подробностей.</span>
-                </li>
-                <li class="section__list-item">
-                    <p class="list-item__title">Договор: Внимание к деталям</p>
-                    <span class="list-item__text">Внимательно проверьте все условия: должностные обязанности, размер и
-                        сроки выплаты вознаграждения, режим работы, срок действия договора и условия его расторжения. Не
-                        стесняйтесь задавать уточняющие вопросы работодателю, чтобы избежать недопонимания в
-                        будущем.</span>
-                </li>
-                <li class="section__list-item">
-                    <p class="list-item__title">Сопроводительное письмо: Ваше персональное обращение</p>
-                    <span class="list-item__text">Это не повторение резюме, а возможность показать мотивацию и интерес к
-                        конкретной компании. Объясните, почему вы хотите работать именно там и чем можете быть полезны.
-                        Персонализируйте обращение, указав имя менеджера по подбору персонала.</span>
-                </li>
-            </ol>
-        </div>
-    </section>
-
-    <section class="actions">
-        <div class="container">
-            <h1 class="section__title">Универсальный алгоритм для создания любого документа</h1>
-            <p class="section__text">Сервис Doc.Forms поможет вам подготовить безупречные документы всего за три шага:
-            </p>
-            <ol class="section__list">
-                <li class="section__list-item">
-                    <p class="list-item__title">Выбрать шаблон</p>
-                    <span class="list-item__text">Найдите подходящий образец в нашем каталоге — от резюме до
-                        договора.</span>
-                </li>
-                <li class="section__list-item">
-                    <p class="list-item__title">Заполнить поля с данными</p>
-                    <span class="list-item__text">Внесите информацию в готовую профессиональную структуру. Система
-                        подскажет, что и где указать.</span>
-                </li>
-                <li class="section__list-item">
-                    <p class="list-item__title">Скачать документ</p>
-                    <span class="list-item__text">Сохраните готовый файл в формате PDF или DOC, чтобы сразу
-                        использовать.</span>
-                </li>
-            </ol>
-        </div>
-    </section>
+    </div>
+</section>
 
 
 {% endblock %}

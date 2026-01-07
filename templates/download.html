@@ -37,8 +37,8 @@
             </div>
         </div>
         <div class="download__buttons">
-            <button class="download_btn download__pdf">Скачать PDF</button>
-            <button class="download_btn download__docs">Скачать DOCX</button>
+            <button onclick="downloadFile('pdf', '{{fileId}}')" class="download_btn download__pdf">Скачать PDF</button>
+            <button onclick="downloadFile('word', '{{fileId}}')" class="download_btn download__docs">Скачать DOCX</button>
         </div>
     </div>
 </section>
@@ -110,4 +110,8 @@
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 <script src="{{ url_for('static', filename='scripts/pdf-viewer.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/file.js') }}"></script>
+<script>
+    loadPDF('{{pdfLink}}');
+</script>
 {% endblock %}
