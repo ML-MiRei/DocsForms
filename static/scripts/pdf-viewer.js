@@ -1,6 +1,6 @@
 let pdfDoc = null;
 let currentPage = 1;
-let scale =  window.innerWidth > 1100 ? window.innerWidth / 1920 :  window.innerWidth / 1100;
+let scale = window.innerWidth > 1920 ? window.innerWidth / 2220 : window.innerWidth > 1100 ? window.innerWidth / 1920 : window.innerWidth / 1100;
 
 const canvas = document.getElementById('pdf-canvas');
 const ctx = canvas.getContext('2d');

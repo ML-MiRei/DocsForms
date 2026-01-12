@@ -1,7 +1,11 @@
+from datetime import datetime
+from fileinput import filename
 import os
-from flask import Flask, jsonify, render_template, session  
+from flask import Flask, jsonify, render_template, send_file, session  
 from flask import request 
-from data import resumeTemplates, resumeConfig, myDocs, myPayments, values;  
+from generator import convert_pdf_to_docx, generate_car_contract, generate_pdf
+from db import create_database_if_not_exists, create_user, create_users_table, verify_user_credentials_plain
+from data import resumeTemplates, resumeConfig, myDocs, myPayments, values, statementConfig, statementValues, contractSchema, contractValues 
 
 app = Flask(__name__)  
 app.secret_key = os.urandom(24)
@@ -25,9 +29,9 @@ def documents():
 
 @app.route("/download")
 def download():
-    #Готовый файл для предварительного просмотра
-    pdfLink = 'static/res/example.pdf'
-    return render_template("download.html", pdfLink = pdfLink, fileId = '1' ) 
+    fileId = request.args.get('fileId', 'example')
+    pdfLink = f'static/res/{fileId}.pdf'
+    return render_template("download.html", pdfLink = pdfLink, fileId = fileId ) 
 
 @app.route("/registration", methods=['post', 'get'])
 def registration():
@@ -43,8 +47,27 @@ def resumeConstructor(id):
     # По id выбирается шаблон резюме
     return render_template("constructor.html", constructorConfig=resumeConfig, values=values) 
 
-@app.route('/generate', methods=['POST'])
-def generate():
+@app.route('/constructor/by-sell/', defaults={'id': '1'})
+@app.route('/constructor/by-sell/<id>')
+def bySellConstructor(id):
+    return render_template(
+        "bysell.html",
+        constructorConfig=contractSchema,
+        values=contractValues
+    )
+
+@app.route('/constructor/statement/', defaults={'id': '1'})
+@app.route('/constructor/statement/<id>')
+def statementConstructor(id):
+    return render_template(
+        "statement_constructor.html",
+        constructorConfig=statementConfig,
+        values=statementValues
+    )
+
+
+@app.route('/register', methods=['POST'])
+def register():
     try:
         data = request.get_json()
         
@@ -53,100 +76,127 @@ def generate():
                 'success': False,
                 'error': 'Нет данных для обработки'
             }), 400
-            
-        # Заглушка 
-        # Здесь какая-то логика
+
+        user_id = create_user(
+            data['fullName'],
+            data['email'],
+            data.get('phone'),
+            data['login'],
+            data['password'],
+        )
+
+        session['user'] = {
+            'id': user_id,
+            'login': data['login'],
+            'email': data['email'],
+            'name': data['fullName'],
+            'dateRegistration': datetime.now()
+        }
 
         return jsonify({
             'success': True,
-            'message': 'Генерация прошла успешно',
+            'message': 'Регистрация прошла успешно',
         }), 200
-        
-
             
     except Exception as e:
-        app.logger.error(f'Ошибка при авторизации: {str(e)}')
+        print(e)
+        app.logger.error(f'Ошибка при регистрации: {str(e)}')
         return jsonify({
             'success': False,
             'error': 'Внутренняя ошибка сервера'
         }), 500
+
+import json
+import uuid
+
+@app.route('/generate', methods=['POST'])
+def generate():
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'success': False, 'error': 'Нет данных для обработки'}), 400
+
+        form_data = json.loads(data.get('data', '{}'))
+        doc_type = data.get('docType', 'vacation') 
+
+        file_id = str(uuid.uuid4())
+        file_path = f'static/res/{file_id}.pdf'
+
+        if doc_type == 'vacation':
+            generate_pdf(file_path, form_data)
+        elif doc_type == 'car_contract':
+            generate_car_contract(file_path, form_data)
+        else:
+            return jsonify({'success': False, 'error': 'Неизвестный тип документа'}), 400
+
+        return jsonify({
+            'success': True,
+            'message': 'Генерация прошла успешно',
+            'fileId': file_id
+        }), 200
+
+    except Exception as e:
+        app.logger.error(f'Ошибка при генерации PDF: {str(e)}')
+        return jsonify({'success': False, 'error': 'Внутренняя ошибка сервера'}), 500
+
 
 @app.route('/login', methods=['POST'])
 def login():
     try:
         data = request.get_json()
-        
         if not data:
-            return jsonify({
-                'success': False,
-                'error': 'Нет данных для обработки'
-            }), 400
-        
-        login = data.get('login', '').strip()
+            return jsonify({'success': False, 'error': 'Нет данных'}), 400
+
+        login_value = data.get('login', '').strip()
         password = data.get('password', '').strip()
-        
+
+        if not login_value or not password:
+            return jsonify({'success': False, 'error': 'Заполните все поля'}), 400
+
+        user = verify_user_credentials_plain(login_value, password)
+
+        if not user:
+            return jsonify({'success': False, 'error': 'Неверный логин или пароль'}), 401
+
         session['user'] = {
-            'name': 'Player',
-            'id' : 1,
-            'status': 'free',
-            'email': 'example@gmail.com',
-            'login': 'login',
-            'dateRegistration' : '22.02.2002',
-            'amountAttemps' : 5
+            'id': user['id'],
+            'login': user['login'],
+            'email': user['email'],
+            'name': user['full_name'],
+            'dateRegistration': user['date_registration']
         }
-        
-        # Заглушка 
-        # Здесь какая-то логика
-        if login == "admin" and password == "123":
-            return jsonify({
-                'success': True,
-                'message': 'Авторизация успешна'
-            }), 200
-        else:
-            return jsonify({
-                'success': False,
-                'error': 'Неверный логин или пароль'
-            }), 401
-            
+
+        return jsonify({'success': True, 'message': 'Авторизация успешна'}), 200
+
     except Exception as e:
         app.logger.error(f'Ошибка при авторизации: {str(e)}')
-        return jsonify({
-            'success': False,
-            'error': 'Внутренняя ошибка сервера'
-        }), 500
+        return jsonify({'success': False, 'error': 'Внутренняя ошибка сервера'}), 500
     
 
-@app.route('/file', methods=['POST', 'DELETE'])
-def file():
-    data = request.get_json()
+from flask import send_from_directory
 
-    #что-то происходит
+@app.route('/file/<file_id>', methods=['GET'])
+def download_file(file_id):
+    file_type = request.args.get('type', 'pdf')
+    directory = os.path.join(app.root_path, 'static', 'res')
+    filename = f"{file_id}.pdf"
 
-    match request.method:
-        case 'POST':
-            type = data.get('type', '').strip() #pdf, doc
-            fileId = data.get('id', '').strip()
-            print('download  '+ fileId )
+    print(file_type)
+    if file_type == 'docx':
+        convert_pdf_to_docx(os.path.join(directory, filename), os.path.join(directory, "Document.docx"))
+        filename = 'Document.docx'
 
-        case 'DELETE':
-            fileId = data.get('id', '').strip()
-            print('delete '+ fileId )
+    if not os.path.exists(os.path.join(directory, filename)):
+        os.abort(404, description="File not found")
 
+    return send_from_directory(directory, filename, as_attachment=True)
 
-
-    return jsonify({
-            'success': True,
-        }), 200
 
 
 
 @app.route('/logout', methods=['POST'])
 def logout():
     try:    
-
-        # Заглушка 
-        # Здесь какая-то логика
-
         session['user'] = None
         
         return jsonify({
@@ -164,4 +214,6 @@ def logout():
 
 
 if __name__ == "__main__":
+    create_database_if_not_exists()
+    create_users_table()
     app.run(debug=True) 

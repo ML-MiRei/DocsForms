@@ -5,14 +5,14 @@ createDoc.addEventListener('click', (ev) => {
     if (form.reportValidity()) {
         ev.preventDefault();
 
-        // const formDataToJson = (formData) => JSON.stringify(Object.fromEntries(formData));
         const formElement = document.querySelector('form');
         const jsonData = formDataToJson(new FormData(formElement));
 
-        generate(jsonData);
-
+        const docType = ev.target.dataset.docType || 'vacation'; // определяем тип
+        generate(jsonData, docType);
     }
 });
+
 
 
 const formDataToJson = (formData) => {
@@ -52,21 +52,17 @@ const formDataToJson = (formData) => {
 };
 
 
-async function generate(data) {
+async function generate(data, docType) {
     try {
-        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        const submitBtn = document.querySelector('button[type="submit"]');
         const originalBtnText = submitBtn.textContent;
         submitBtn.textContent = 'Отправка...';
         submitBtn.disabled = true;
 
         const response = await fetch('/generate', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                data: data
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: data, docType: docType })
         });
 
         const result = await response.json();
@@ -75,16 +71,11 @@ async function generate(data) {
         submitBtn.disabled = false;
 
         if (response.ok && result.success) {
-
-
-
-            window.location.href = "/download";
+            window.location.href = `/download?fileId=${result.fileId}`;
         }
     } catch (error) {
         alert('Ошибка соединения с сервером');
-
-        const submitBtn = loginForm.querySelector('button[type="submit"]');
-        submitBtn.textContent = 'Войти';
+        submitBtn.textContent = originalBtnText;
         submitBtn.disabled = false;
     }
 }

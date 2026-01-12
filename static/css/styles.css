@@ -1591,8 +1591,11 @@ canvas {
 }
 
 .profile-docs__create-btn {
+    display: flex;
     height: 40px;
     max-width: 200px;
+    align-items: center;
+    justify-content: center;
 }
 
 .doc-card {
@@ -1684,7 +1687,7 @@ canvas {
     margin-bottom: 50px;
 }
 
-.profile__add-btn__icon{
+.profile__add-btn__icon {
     font-size: 30px;
 }
 
@@ -1793,23 +1796,23 @@ canvas {
         width: 150px;
     }
 
-    .title-underscore__text{
+    .title-underscore__text {
         font-size: 20px;
     }
 
-    .title__text{
+    .title__text {
         font-size: 16px;
     }
 
-    .profile__add-btn__text{
+    .profile__add-btn__text {
         display: none;
     }
 
-    .profile__add-btn__icon{
+    .profile__add-btn__icon {
         display: block;
     }
 
-    .profile-docs__create-btn{
+    .profile-docs__create-btn {
         width: 45px;
         border-radius: 50%;
     }

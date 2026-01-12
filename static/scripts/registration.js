@@ -23,64 +23,61 @@ function showError(errorId) {
     document.getElementById(errorId).classList.add('error-visible');
 }
 
-registerForm.addEventListener('submit', function (e) {
+registerForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     resetErrors();
 
-    const fullName = document.getElementById('fullName').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const policyCheckbox = document.getElementById('policyAgreement');
+    const payload = {
+        fullName: document.getElementById('fullName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        login: document.getElementById('login').value.trim(),
+        password: document.getElementById('password').value,
+        confirmPassword: document.getElementById('confirmPassword').value
+    };
 
     let isValid = true;
 
-    if (!validateFullName(fullName)) {
-        showError('fullNameError');
-        isValid = false;
-    }
-
-    if (!validateEmail(email)) {
-        showError('emailError');
-        isValid = false;
-    }
-
-    if (!validatePhone(phone)) {
-        showError('phoneError');
-        isValid = false;
-    }
-
-    if (!validateUsername(username)) {
-        showError('usernameError');
-        isValid = false;
-    }
-
-    if (!validatePassword(password)) {
-        showError('passwordError');
-        isValid = false;
-    }
-
-    if (!validatePasswordMatch(password, confirmPassword)) {
-        showError('confirmPasswordError');
-        isValid = false;
-    }
-
-    if (!validatePolicy(policyCheckbox)) {
-        showError('policyError');
-        isValid = false;
-    }
+    // if (!validateFullName(payload.fullName)) { showError('fullNameError'); isValid = false; }
+    // if (!validateEmail(payload.email)) { showError('emailError'); isValid = false; }
+    // if (!validatePhone(payload.phone)) { showError('phoneError'); isValid = false; }
+    // if (!validateUsername(payload.username)) { showError('usernameError'); isValid = false; }
+    // if (!validatePassword(payload.password)) { showError('passwordError'); isValid = false; }
+    // if (!validatePasswordMatch(payload.password, payload.confirmPassword)) {
+    //     showError('confirmPasswordError');
+    //     isValid = false;
+    // }
 
     if (isValid) {
         const registerButton = document.getElementById('registerButton');
         registerButton.textContent = 'Регистрация...';
         registerButton.disabled = true;
 
-         alert('Регистрация успешно завершена! Добро пожаловать в личный кабинет.');
-            registerButton.textContent = 'Зарегистрироваться';
+        alert('Регистрация успешно завершена! Добро пожаловать в личный кабинет.');
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                alert(result.error || 'Ошибка регистрации');
+                return;
+            }
+
+            window.location.replace('/');
+
+        } catch (err) {
+            console.error('Ошибка при регистрации:', err);
+            alert(err);
+        } finally {
             registerButton.disabled = false;
-            window.location.replace("/");
+            registerButton.textContent = 'Зарегистрироваться';
+        }
     }
 });
 

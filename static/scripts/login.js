@@ -48,7 +48,7 @@ async function sendLoginData(login, password) {
         submitBtn.textContent = 'Отправка...';
         submitBtn.disabled = true;
 
-        const response = await fetch('/login', {
+        const response = await fetch('http://127.0.0.1:5000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -60,7 +60,6 @@ async function sendLoginData(login, password) {
         });
 
         const result = await response.json();
-
         submitBtn.textContent = originalBtnText;
         submitBtn.disabled = false;
 
@@ -73,7 +72,8 @@ async function sendLoginData(login, password) {
                 myModal.hide();
             }
 
-            window.location.href = "/";
+             window.location.reload()
+
         } else {
             passwordError.textContent = 'Ошибка авторизации';
             passwordError.style.display = 'block';

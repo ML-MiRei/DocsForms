@@ -59,7 +59,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="payments">
+            <!-- <div class="payments">
                 <div class="payments__title profile-docs__title">
                     <img src="{{ url_for('static', filename='images/account_box.svg') }}" alt=""
                         class="profile-docs__title-icon profile-docs__title-icon">
@@ -84,7 +84,7 @@
                     </tbody>
 
                 </table>
-            </div>
+            </div> -->
         </div>
         <div class="profile__right-side">
             <div class="profile-docs__title">
@@ -92,16 +92,12 @@
                     class="profile-docs__title-icon">
                 <p class="profile-docs__title-text title-underscore__text">Информация</p>
             </div>
-            <p class="title__text m0">Ваш статус:</p>
-            <p class="title__text mb20">{{session['user'].status}}</p>
             <p class="title__text m0">Ваш логин:</p>
             <p class="title__text mb20">{{session['user'].login}}</p>
             <p class="title__text m0">Email:</p>
-            <p class="title__text mb20">{{session['user'].emal}}</p>
+            <p class="title__text mb20">{{session['user'].email}}</p>
             <p class="title__text m0">Зарегистрирован:</p>
             <p class="title__text mb20">{{session['user'].dateRegistration}}</p>
-            <p class="title__text m0">Лимиты скачивания:</p>
-            <p class="title__text mb20">Осталось {{session['user'].amountAttempts}} попыток для скачивания</p>
             <div class="profile__important-info">
                 <p class="profile-docs__title-text title-underscore__text">Важная информация:</p>
                 <p class="title__text">Личный кабинет автоматически удаляется с сайта через 30 дней неактивности.

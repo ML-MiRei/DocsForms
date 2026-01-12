@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="constructor">
+    <div class="container">
+        <form id="form">
+            <div class="forms-layout" id="forms-layout"></div>
+            <div class="form-cont save-result__cont">
+                <div class="form-row-flex">
+                    <button type="submit" id="createDoc" class="modal-button save-result__btn" data-doc-type="vacation">
+                        Сохранить и посмотреть результат
+                    </button>
+                    <div class="big-checkbox">
+                        <input type="checkbox" style="width: 20px;" name="consent-processing" id="consent-processing" class="form-input checkbox-input">
+                        <label for="consent-processing" class="form-label">
+                            Согласен с Политикой обработки персональных данных и даю Согласие на обработку персональных данных.
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <script src="{{ url_for('static', filename='scripts/constructors-generator.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/constructor.js') }}"></script>
+        <script type="text/javascript">
+            // Конфигурация формы для заявления
+            const constructorConfig = {{ constructorConfig | tojson }};
+            const values = {{ values | tojson }};
+
+            constructorConfig.forEach(form => {
+                if (form.type === 'dynamic') {
+                    generateDynamicForm(form);
+                } else {
+                    generateForm(form);
+                }
+            });
+
+            loadValues(values, constructorConfig);
+        </script>
+    </div>
+</section>
+
+{% endblock %}
