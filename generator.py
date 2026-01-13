@@ -119,3 +119,98 @@ def convert_pdf_to_docx(pdf_file, docx_file):
     cv = Converter(pdf_file)
     cv.convert(docx_file, start=0, end=None)
     cv.close()
+
+
+def generate_resume_pdf(file_path: str, data: dict):
+    font_path = os.path.join("fonts", "DejaVuSans.ttf")
+    pdfmetrics.registerFont(TTFont("DejaVu", font_path))
+
+    c = canvas.Canvas(file_path, pagesize=A4)
+    width, height = A4
+
+    margin_x = 50
+    y = height - 50
+    line_step = 16
+
+    # === HEADER ===
+    c.setFont("DejaVu", 18)
+    full_name = f"{data.get('lastName')} {data.get('name')} {data.get('patronymic')}"
+    c.drawString(margin_x, y, full_name)
+
+    y -= 28
+    c.setFont("DejaVu", 13)
+    c.drawString(margin_x, y, f"Желаемая должность: {data.get('position', '')}")
+
+    y -= 35
+
+    # === CONTACTS ===
+    c.setFont("DejaVu", 11)
+    c.drawString(margin_x, y, f"Телефон: {data.get('phone', '')}")
+    y -= line_step
+    c.drawString(margin_x, y, f"Email: {data.get('email', '')}")
+
+    y -= 25
+
+    # === PERSONAL INFO ===
+    c.setFont("DejaVu", 12)
+    c.drawString(margin_x, y, "Общая информация")
+    y -= 20
+    c.setFont("DejaVu", 11)
+
+    info_rows = [
+        ("Город", data.get("city")),
+        ("Гражданство", data.get("citizenship")),
+        ("Готовность к переезду", "Да" if data.get("removal") == "possible" else data.get("removal")),
+        ("Дата рождения", data.get("birth-date")),
+        ("Семейное положение", data.get("family-status")),
+        ("Пол", data.get("gender")),
+        ("Тип занятости", data.get("employment-type")),
+        ("График работы", data.get("work-schedule")),
+        ("Желаемая зарплата", f"{data.get('salary', '')} {data.get('currency', '')}")
+    ]
+
+    for label, value in info_rows:
+        if value:
+            c.drawString(margin_x, y, f"{label}: {value}")
+            y -= line_step
+
+    y -= 20
+
+    # === EDUCATION ===
+    c.setFont("DejaVu", 12)
+    c.drawString(margin_x, y, "Образование")
+    y -= 20
+    c.setFont("DejaVu", 11)
+
+    for edu in data.get("education", []):
+        c.drawString(margin_x, y, edu.get("institution-name", ""))
+        y -= line_step
+        c.drawString(
+            margin_x,
+            y,
+            f"{edu.get('faculty', '')}, {edu.get('specialty', '')}"
+        )
+        y -= line_step
+        c.drawString(
+            margin_x,
+            y,
+            f"{edu.get('start-year')} – {edu.get('end-year')} ({edu.get('education-form')})"
+        )
+        y -= line_step
+
+        if edu.get("education-achievements"):
+            c.drawString(margin_x, y, f"Достижения: {edu.get('education-achievements')}")
+            y -= line_step
+
+        y -= 10
+
+    # === FOOTER ===
+    y = 40
+    c.setFont("DejaVu", 9)
+    c.drawString(
+        margin_x,
+        y,
+        f"Резюме сформировано {datetime.now().strftime('%d.%m.%Y')}"
+    )
+
+    c.save()

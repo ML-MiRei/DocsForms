@@ -3,7 +3,7 @@ from fileinput import filename
 import os
 from flask import Flask, jsonify, render_template, send_file, session  
 from flask import request 
-from generator import convert_pdf_to_docx, generate_car_contract, generate_pdf
+from generator import convert_pdf_to_docx, generate_car_contract, generate_pdf, generate_resume_pdf
 from db import create_database_if_not_exists, create_user, create_users_table, verify_user_credentials_plain
 from data import resumeTemplates, resumeConfig, myDocs, myPayments, values, statementConfig, statementValues, contractSchema, contractValues 
 
@@ -126,6 +126,8 @@ def generate():
             generate_pdf(file_path, form_data)
         elif doc_type == 'car_contract':
             generate_car_contract(file_path, form_data)
+        elif doc_type == "resume":
+            generate_resume_pdf(file_path, form_data)
         else:
             return jsonify({'success': False, 'error': 'Неизвестный тип документа'}), 400
 
